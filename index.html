@@ -3,137 +3,230 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yume - Assistente</title>
-    <meta name="description" content="ChatBot Yume - Um assistente virtual inteligente com tecnologia de IA avançada">
-    <meta name="keywords" content="chatbot, IA, assistente virtual, inteligência artificial">
+    <title>Yume - Assistente IA | ORPHEO Platforms</title>
+    <meta name="description" content="Yume - Assistente virtual inteligente powered by ORPHEO Platforms">
+    <meta name="keywords" content="yume, orpheo, chatbot, IA, assistente virtual">
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="assets/icons/favicon.ico">
 </head>
 <body>
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <div class="logo">
-                <div class="logo-icon">🧠</div>
-                <h1>Yume</h1>
+            <div class="header-left">
+                <div class="logo">
+                    <div class="logo-icon">🌌</div>
+                    <div class="logo-text">
+                        <h1>Yume</h1>
+                        <span class="platform-badge">Powered by ORPHEO Platforms</span>
+                    </div>
+                </div>
             </div>
-            <div class="header-actions">
-                <button class="btn-secondary" id="themeToggle">
-                    <span class="theme-icon">🌙</span>
-                    <span class="theme-text">Modo Escuro</span>
-                </button>
+            
+            <div class="header-right">
+                <div class="header-actions">
+                    <button class="btn-icon" id="settingsBtn" title="Configurações">
+                        <span>⚙️</span>
+                    </button>
+                    <button class="btn-theme" id="themeToggle">
+                        <div class="theme-switch">
+                            <span class="sun">☀️</span>
+                            <div class="switch-track"></div>
+                            <span class="moon">🌙</span>
+                        </div>
+                    </button>
+                </div>
             </div>
         </header>
 
-        <!-- Main Chat Container -->
+        <!-- Main Content -->
         <main class="main-content">
-            <div class="chat-container">
-                <div class="chat-header">
-                    <div class="chat-info">
-                        <h2>Assistente Virtual</h2>
-                        <div class="status">
-                            <div class="status-dot online"></div>
-                            <span>Online</span>
-                        </div>
-                    </div>
-                    <button class="btn-clear" id="clearBtn">
-                        <span>🗑️ Limpar Chat</span>
-                    </button>
-                </div>
-                
-                <div class="chat-messages" id="chatMessages">
-                    <div class="message bot-message welcome-message">
-                        <div class="message-avatar">🤖</div>
-                        <div class="message-content">
-                            <div class="message-text">
-                                <strong>Olá! Sou a Yume 🧠</strong><br><br>
-                                Estou aqui para ajudar você com:<br>
-                                • Respostas inteligentes<br>
-                                • Solução de problemas<br>
-                                • Informações em tempo real<br>
-                                • E muito mais!<br><br>
-                                Como posso ajudá-lo hoje?
+            <!-- Chat Container -->
+            <div class="chat-section">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="chat-info">
+                            <div class="assistant-avatar">
+                                <div class="avatar-pulse"></div>
+                                <div class="avatar-icon">✨</div>
                             </div>
-                            <div class="message-time" id="initialTime"></div>
+                            <div class="assistant-info">
+                                <h2>Yume Assistant</h2>
+                                <div class="status">
+                                    <div class="status-dot"></div>
+                                    <span>Conectado</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chat-actions">
+                            <button class="btn-ghost" id="clearBtn" title="Nova conversa">
+                                <span>🔄</span>
+                                <span>Nova Conversa</span>
+                            </button>
                         </div>
                     </div>
-                </div>
-                
-                <div class="chat-input-container">
-                    <div class="typing-indicator" id="typingIndicator">
-                        <div class="typing-dots">
-                            <span></span>
-                            <span></span>
-                            <span></span>
+                    
+                    <!-- Messages Container -->
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message welcome-message">
+                            <div class="message-avatar">
+                                <div class="avatar-glow"></div>
+                                ✨
+                            </div>
+                            <div class="message-content">
+                                <div class="message-header">
+                                    <span class="sender-name">Yume</span>
+                                    <span class="message-badge">AI</span>
+                                </div>
+                                <div class="message-text">
+                                    <strong>Olá! Sou Yume 🌌</strong><br><br>
+                                    Seu assistente virtual da <strong>ORPHEO Platforms</strong>. 
+                                    Estou aqui para transformar suas ideias em realidade através da inteligência artificial.<br><br>
+                                    💫 <strong>Como posso iluminar seu caminho hoje?</strong>
+                                </div>
+                                <div class="message-time" id="initialTime"></div>
+                            </div>
                         </div>
-                        <span>ChatBot Genius está digitando...</span>
                     </div>
                     
-                    <div class="input-group">
-                        <input 
-                            type="text" 
-                            id="messageInput" 
-                            placeholder="Digite sua mensagem aqui..." 
-                            maxlength="1000"
-                            autocomplete="off"
-                        >
-                        <button id="sendBtn" class="btn-primary" disabled>
-                            <span class="send-text">Enviar</span>
-                            <span class="send-icon">🚀</span>
-                        </button>
-                    </div>
-                    
-                    <div class="quick-actions">
-                        <button class="quick-btn" data-message="Como você funciona?">
-                            🤔 Como funciona?
-                        </button>
-                        <button class="quick-btn" data-message="Quais são seus recursos?">
-                            💡 Recursos
-                        </button>
-                        <button class="quick-btn" data-message="Me ajude com um problema">
-                            🔧 Ajuda Técnica
-                        </button>
+                    <!-- Input Area -->
+                    <div class="chat-input-container">
+                        <div class="typing-indicator" id="typingIndicator">
+                            <div class="typing-content">
+                                <div class="typing-dots">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <span>Yume está pensando...</span>
+                            </div>
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-wrapper">
+                                <input 
+                                    type="text" 
+                                    id="messageInput" 
+                                    placeholder="Converse com Yume..." 
+                                    maxlength="1000"
+                                    autocomplete="off"
+                                >
+                                <div class="input-actions">
+                                    <button class="btn-input" id="voiceBtn" title="Voz">
+                                        🎤
+                                    </button>
+                                </div>
+                            </div>
+                            <button id="sendBtn" class="btn-primary" disabled>
+                                <span class="send-icon">🚀</span>
+                            </button>
+                        </div>
+                        
+                        <div class="quick-actions">
+                            <div class="quick-section">
+                                <span class="quick-label">Sugestões rápidas:</span>
+                                <div class="quick-buttons">
+                                    <button class="quick-btn" data-message="Explique sobre ORPHEO Platforms">
+                                        🏢 Sobre ORPHEO
+                                    </button>
+                                    <button class="quick-btn" data-message="Quais tecnologias você usa?">
+                                        💻 Tecnologias
+                                    </button>
+                                    <button class="quick-btn" data-message="Me ajude com um projeto">
+                                        🔧 Suporte Projeto
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <!-- Features Sidebar -->
             <aside class="features-sidebar">
-                <div class="sidebar-section">
-                    <h3>🎯 Recursos</h3>
-                    <ul class="features-list">
-                        <li>✅ Respostas em tempo real</li>
-                        <li>✅ Suporte 24/7</li>
-                        <li>✅ Processamento de linguagem natural</li>
-                        <li>✅ Histórico de conversas</li>
-                        <li>✅ Interface responsiva</li>
-                        <li>✅ Tema claro/escuro</li>
-                    </ul>
+                <div class="sidebar-header">
+                    <h3>🎯 Recursos Yume</h3>
+                    <div class="orpheo-badge">
+                        <span>ORPHEO</span>
+                    </div>
                 </div>
                 
                 <div class="sidebar-section">
-                    <h3>📊 Estatísticas</h3>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <span class="stat-value" id="messagesCount">0</span>
-                            <span class="stat-label">Mensagens</span>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <div class="feature-content">
+                            <h4>IA Avançada</h4>
+                            <p>Processamento de linguagem natural de última geração</p>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-value" id="sessionTime">0:00</span>
-                            <span class="stat-label">Tempo</span>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-content">
+                            <h4>Respostas Rápidas</h4>
+                            <p>Tempo de resposta otimizado para melhor experiência</p>
+                        </div>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <div class="feature-icon">🔒</div>
+                        <div class="feature-content">
+                            <h4>Privacidade</h4>
+                            <p>Seus dados são protegidos e respeitados</p>
                         </div>
                     </div>
                 </div>
                 
                 <div class="sidebar-section">
-                    <h3>🔧 O que posso fazer</h3>
-                    <div class="tech-tags">
-                        <span class="tech-tag">Recomendar Anime</span>
-                        <span class="tech-tag">Recomendar Mangá</span>
-                        <span class="tech-tag">auxilio em dúvidas</span>
-                        <span class="tech-tag">Ajuda a idosos</span>
-                        <span class="tech-tag">IA</span>
+                    <h4>📊 Estatísticas da Sessão</h4>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">💬</div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="messagesCount">0</span>
+                                <span class="stat-label">Mensagens</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">⏱️</div>
+                            <div class="stat-info">
+                                <span class="stat-value" id="sessionTime">0:00</span>
+                                <span class="stat-label">Tempo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h4>🛠️ Tecnologias</h4>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <span class="tech-dot" style="background: #61DAFB;"></span>
+                            <span>React</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-dot" style="background: #3178C6;"></span>
+                            <span>TypeScript</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-dot" style="background: #000000;"></span>
+                            <span>Next.js</span>
+                        </div>
+                        <div class="tech-item">
+                            <span class="tech-dot" style="background: #38B2AC;"></span>
+                            <span>Tailwind</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-footer">
+                    <div class="powered-by">
+                        <span>Powered by</span>
+                        <div class="orpheo-logo">
+                            <span>ORPHEO</span>
+                            <span>Platforms</span>
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -141,11 +234,18 @@
 
         <!-- Footer -->
         <footer class="footer">
-            <p>&copy; 2024 Yume Assistente. Desenvolvido com ❤️ por ORPHEO Platforms.</p>
-            <div class="footer-links">
-                <a href="https://naotodev1.github.io/terms-e-policy" target="_blank">Termos de Uso e Privacidade</a>
-                <a href="#" id="privacyBtn">ORPHEO PLATFORMS</a>
-                <a href="#" id="aboutBtn">Sobre</a>
+            <div class="footer-content">
+                <div class="footer-left">
+                    <p>&copy; 2024 <strong>ORPHEO Platforms</strong>. Transformando ideias em realidade.</p>
+                </div>
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="https://orpheo.ai" target="_blank">Website</a>
+                        <a href="#" id="privacyBtn">Privacidade</a>
+                        <a href="#" id="aboutBtn">Sobre</a>
+                        <a href="https://github.com/orpheo-platforms" target="_blank">GitHub</a>
+                    </div>
+                </div>
             </div>
         </footer>
     </div>
@@ -154,7 +254,8 @@
     <div class="modal" id="infoModal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modalTitle">Sobre a Yume</h3>
+                <div class="modal-icon">🌌</div>
+                <h3 id="modalTitle">Sobre Yume</h3>
                 <button class="close-btn" id="closeModal">&times;</button>
             </div>
             <div class="modal-body" id="modalContent">
