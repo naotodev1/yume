@@ -1,4 +1,4 @@
-// Configuração do ChatBot Genius para GitHub Pages
+// Configuração do ChatBot Yume para GitHub Pages
 class ChatBotGenius {
     constructor() {
         this.messagesCount = 0;
@@ -127,7 +127,7 @@ class ChatBotGenius {
         }
 
         if (lowerMessage.includes('nome')) {
-            return 'Meu nome é ChatBot Genius! Fui criado para ser seu assistente virtual inteligente. 😊';
+            return 'Meu nome é Yume! Fui criado para ser seu assistente virtual inteligente. 😊';
         }
 
         if (lowerMessage.includes('obrigado') || lowerMessage.includes('thanks')) {
