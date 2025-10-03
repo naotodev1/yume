@@ -7,2180 +7,1776 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ec4899;
-            --primary-dark: #be185d;
-            --secondary: #8b5cf6;
-            --accent: #3b82f6;
+            --primary: #8b5cf6;
+            --primary-dark: #7c3aed;
+            --secondary: #ec4899;
+            --secondary-dark: #db2777;
             --success: #10b981;
-            --warning: #f59e0b;
             --danger: #ef4444;
-            --info: #06b6d4;
-            --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --surface: rgba(255, 255, 255, 0.98);
-            --text: #1f2937;
-            --text-muted: #6b7280;
-            --border: rgba(236, 72, 153, 0.2);
-            --shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-            --shadow-lg: 0 20px 50px rgba(236, 72, 153, 0.3);
-            --glass: rgba(255, 255, 255, 0.25);
-            --glass-border: rgba(255, 255, 255, 0.18);
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
         }
 
-
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'SF Pro Display', sans-serif;
-            background: var(--bg-gradient);
-            min-height: 100vh;
-            color: var(--text);
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
-            overflow-x: hidden;
         }
 
-
-        .app-container {
-            display: grid;
-            grid-template-columns: 320px 1fr;
-            height: 100vh;
-            max-width: 2000px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            background: var(--surface);
-            backdrop-filter: blur(40px);
-            position: relative;
-            box-shadow: var(--shadow-lg);
+            padding: 0 1rem;
         }
 
-
-        /* Enhanced Sidebar */
-        .sidebar {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.85));
-            backdrop-filter: blur(40px);
-            border-right: 1px solid var(--border);
-            padding: 24px 16px;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            box-shadow: var(--shadow);
-            position: relative;
-            z-index: 10;
-        }
-
-
-        .sidebar-header {
-            display: flex;
+        /* Botões */
+        .btn {
+            display: inline-flex;
             align-items: center;
-            gap: 12px;
-            margin-bottom: 32px;
-            padding: 16px;
-            background: var(--glass);
-            border-radius: 20px;
-            border: 1px solid var(--glass-border);
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
         }
 
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
 
-        .sidebar-header::before {
-            content: '';
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary-dark));
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background-color: var(--gray-light);
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--gray);
+            color: white;
+        }
+
+        .btn-danger {
+            background-color: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        /* Cards */
+        .card {
+            background-color: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-header {
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        /* Formulários */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon i {
             position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .input-with-icon .form-control {
+            padding-left: 3rem;
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
             top: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            bottom: 0;
+            background-color: var(--gray-light);
+            transition: var(--transition);
+            border-radius: 34px;
         }
 
-
-        .sidebar-avatar {
-            width: 64px;
-            height: 64px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: var(--transition);
             border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--success);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        /* Alertas */
+        .alert {
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-danger {
+            background-color: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+        }
+
+        .alert-success {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
+        }
+
+        /* Grid */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -0.75rem;
+        }
+
+        .col {
+            flex: 1;
+            padding: 0 0.75rem;
+        }
+
+        .col-12 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .col-md-6 {
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+
+        .col-md-4 {
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+        }
+
+        .col-md-3 {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .navbar-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Views */
+        .view {
+            display: none;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        /* Login View */
+        .login-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
-            box-shadow: var(--shadow-lg);
-            animation: float 3s ease-in-out infinite;
-            position: relative;
-            overflow: hidden;
+            padding: 2rem;
         }
 
-
-        .sidebar-avatar::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
-            transform: translateX(-100%);
-            animation: shine 3s ease-in-out infinite;
-        }
-
-
-        @keyframes shine {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.05); }
-        }
-
-
-        .sidebar-title h1 {
-            font-size: 28px;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-        }
-
-
-        .sidebar-subtitle {
-            font-size: 13px;
-            color: var(--primary);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-
-        .mode-selector {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 8px;
-            margin-bottom: 24px;
-            padding: 12px;
-            background: var(--glass);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            backdrop-filter: blur(20px);
-        }
-
-
-        .mode-btn {
-            padding: 14px 8px;
-            border: 2px solid transparent;
-            border-radius: 14px;
-            background: transparent;
-            color: var(--text);
-            font-size: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            position: relative;
-            overflow: hidden;
-        }
-
-
-        .mode-btn.active {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-color: transparent;
+        .login-card {
+            background-color: white;
+            border-radius: 24px;
             box-shadow: var(--shadow);
-            transform: translateY(-2px);
-        }
-
-
-        .mode-btn:hover:not(.active) {
-            background: rgba(236, 72, 153, 0.1);
-            transform: translateY(-1px);
-        }
-
-
-        .sidebar-btn {
+            padding: 2rem;
+            max-width: 400px;
             width: 100%;
-            padding: 18px 20px;
-            margin-bottom: 8px;
-            border: none;
-            border-radius: 16px;
-            background: transparent;
-            color: var(--text);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            position: relative;
-            overflow: hidden;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
         }
 
-
-        .sidebar-btn:hover {
-            background: rgba(236, 72, 153, 0.1);
-            transform: translateX(8px);
-            box-shadow: var(--shadow);
-        }
-
-
-        .sidebar-btn.primary {
+        /* Dashboard */
+        .dashboard-header {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
             font-weight: 700;
-            box-shadow: var(--shadow-lg);
+            margin-bottom: 0.25rem;
         }
 
-
-        .sidebar-btn.primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.4);
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.875rem;
         }
 
-
-        .feature-badge {
-            background: linear-gradient(135deg, #8b5cf6, #a855f7);
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            margin-left: auto;
-            animation: pulse 2s infinite;
-        }
-
-
-        /* Enhanced Chat Area */
-        .chat-area {
+        /* Chat */
+        .chat-container {
             display: flex;
             flex-direction: column;
             height: 100vh;
-            position: relative;
-            background: var(--surface);
         }
 
-
         .chat-header {
-            background: var(--surface);
-            backdrop-filter: blur(40px);
-            padding: 20px 30px;
-            border-bottom: 1px solid var(--border);
+            background-color: white;
+            padding: 1rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
         }
 
-
-        .status-indicator {
-            width: 12px;
-            height: 12px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-            position: relative;
-        }
-
-
-        .status-indicator::after {
-            content: '';
-            position: absolute;
-            inset: -3px;
-            border: 2px solid var(--success);
-            border-radius: 50%;
-            animation: ripple 2s ease-out infinite;
-        }
-
-
-        @keyframes ripple {
-            0% { transform: scale(0.8); opacity: 1; }
-            100% { transform: scale(2.4); opacity: 0; }
-        }
-
-
-        .security-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--success), #059669);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 24px;
-            font-size: 13px;
-            font-weight: 700;
-            box-shadow: var(--shadow);
-        }
-
-
-        .chat-content {
+        .chat-messages {
             flex: 1;
             overflow-y: auto;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            padding: 1rem;
+            background-color: #f8fafc;
         }
-
-
-        .empty-state {
-            text-align: center;
-            margin: auto;
-            max-width: 800px;
-            padding: 60px 40px;
-            background: var(--glass);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-        }
-
-
-        .empty-state h2 {
-            font-size: 42px;
-            margin-bottom: 16px;
-            color: var(--text);
-            font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-
-        .suggestion-chips {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 16px;
-            justify-content: center;
-            margin-top: 32px;
-        }
-
-
-        .suggestion-chip {
-            padding: 18px 24px;
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            color: var(--text);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-
-        .suggestion-chip:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: var(--shadow-lg);
-        }
-
-
-        .messages {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            max-width: 1200px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
 
         .message {
             display: flex;
-            gap: 16px;
-            align-items: flex-start;
-            animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            margin-bottom: 1rem;
         }
-
-
-        @keyframes slideIn {
-            from { 
-                opacity: 0; 
-                transform: translateY(20px) scale(0.95);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-            }
-        }
-
 
         .message.user {
-            flex-direction: row-reverse;
-        }
-
-
-        .message-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-
-
-        .message.yume .message-avatar {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-        }
-
-
-        .message.user .message-avatar {
-            background: linear-gradient(135deg, #60a5fa, #3b82f6);
-        }
-
-
-        .message-content {
-            max-width: 80%;
-            padding: 20px 24px;
-            border-radius: 20px;
-            font-size: 16px;
-            line-height: 1.6;
-            position: relative;
-            box-shadow: var(--shadow);
-        }
-
-
-        .message.yume .message-content {
-            background: var(--surface);
-            backdrop-filter: blur(20px);
-            color: var(--text);
-            border-bottom-left-radius: 8px;
-            border: 1px solid var(--border);
-        }
-
-
-        .message.user .message-content {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border-bottom-right-radius: 8px;
-        }
-
-
-        .message-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 12px;
-            flex-wrap: wrap;
-        }
-
-
-        .message-action-btn {
-            padding: 8px 16px;
-            border: 1px solid var(--border);
-            background: white;
-            border-radius: 10px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-
-        .message-action-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-1px);
-        }
-
-
-        .chat-input-area {
-            padding: 24px 30px;
-            background: var(--surface);
-            backdrop-filter: blur(40px);
-            border-top: 1px solid var(--border);
-            box-shadow: 0 -5px 30px rgba(0, 0, 0, 0.08);
-        }
-
-
-        .chat-input-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            background: white;
-            border: 2px solid var(--border);
-            border-radius: 20px;
-            padding: 16px 100px 16px 24px;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: var(--shadow);
-        }
-
-
-        .chat-input-wrapper:focus-within {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15), var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-
-
-        .chat-input {
-            width: 100%;
-            border: none;
-            outline: none;
-            font-size: 16px;
-            resize: none;
-            max-height: 150px;
-            font-family: inherit;
-            line-height: 1.5;
-            background: transparent;
-        }
-
-
-        .input-actions {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            gap: 8px;
-        }
-
-
-        .input-action-btn {
-            width: 40px;
-            height: 40px;
-            border: none;
-            border-radius: 50%;
-            background: var(--glass);
-            color: var(--text);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-
-        .input-action-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.1);
-        }
-
-
-        .send-btn {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            border: none;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: var(--shadow);
-        }
-
-
-        .send-btn:hover:not(:disabled) {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: var(--shadow-lg);
-        }
-
-
-        .quick-actions {
-            display: flex;
-            gap: 12px;
-            max-width: 1200px;
-            margin: 20px auto 0;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-
-        .quick-action-btn {
-            padding: 12px 20px;
-            border: 2px solid var(--border);
-            background: white;
-            border-radius: 14px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            color: var(--text);
-            box-shadow: var(--shadow);
-        }
-
-
-        .quick-action-btn:hover {
-            background: var(--primary);
-            border-color: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-
-        /* Enhanced Components */
-        .learning-step {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid var(--success);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 16px 0;
-            backdrop-filter: blur(10px);
-        }
-
-
-        .otaku-recommendation {
-            background: rgba(236, 72, 153, 0.1);
-            border-left: 4px solid var(--primary);
-            padding: 20px;
-            border-radius: 12px;
-            margin: 16px 0;
-            backdrop-filter: blur(10px);
-        }
-
-
-        .code-block {
-            background: rgba(30, 30, 40, 0.9);
-            color: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin: 16px 0;
-            font-family: 'Courier New', monospace;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-
-        .tool-result {
-            background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid var(--accent);
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 16px;
-            font-size: 15px;
-            backdrop-filter: blur(10px);
-        }
-
-
-        /* Overlay & Modal Styles */
-        .overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            animation: overlayAppear 0.3s ease-out;
-        }
-
-
-        .card {
-            background: var(--surface);
-            padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
-            max-width: 600px;
-            width: 100%;
-            animation: modalSlide 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 1px solid var(--border);
-            backdrop-filter: blur(40px);
-        }
-
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text);
-        }
-
-
-        .form-group input {
-            width: 100%;
-            padding: 12px 16px;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            font-family: inherit;
-        }
-
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.1);
-        }
-
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-
-        .btn.primary {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-        }
-
-
-        .btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-
-        .btn.secondary {
-            background: #f3f4f6;
-            color: var(--text);
-        }
-
-
-        .btn.secondary:hover {
-            background: #e5e7eb;
-        }
-
-
-        .card-actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
             justify-content: flex-end;
         }
 
-
-        .terms-checkbox {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            margin: 20px 0;
-            padding: 16px;
-            background: rgba(236, 72, 153, 0.05);
-            border-radius: 12px;
-            border: 2px solid var(--border);
+        .message-bubble {
+            max-width: 70%;
+            padding: 1rem;
+            border-radius: 18px;
+            position: relative;
         }
 
+        .message.yume .message-bubble {
+            background-color: white;
+            border-top-left-radius: 4px;
+        }
 
-        .terms-checkbox input[type="checkbox"] {
-            margin-top: 2px;
+        .message.user .message-bubble {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-top-right-radius: 4px;
+        }
+
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
             flex-shrink: 0;
         }
 
-
-        .terms-checkbox label {
-            font-size: 14px;
-            line-height: 1.5;
-            cursor: pointer;
+        .message.yume .message-avatar {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
 
-
-        .terms-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
+        .message.user .message-avatar {
+            background-color: var(--info);
+            color: white;
+            order: 1;
+            margin-right: 0;
+            margin-left: 0.5rem;
         }
 
-
-        .terms-link:hover {
-            color: var(--primary-dark);
-            text-decoration: underline;
-        }
-
-
-        .notification-container {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            z-index: 2000;
+        .chat-input {
+            background-color: white;
+            padding: 1rem;
             display: flex;
-            flex-direction: column;
-            gap: 16px;
+            gap: 0.5rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
         }
 
+        .chat-input input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 24px;
+            font-size: 1rem;
+        }
 
-        .notification {
-            background: white;
-            padding: 20px 24px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
+        .chat-input button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
             display: flex;
             align-items: center;
-            gap: 16px;
-            max-width: 450px;
-            animation: slideInRight 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border-left: 6px solid;
-            position: relative;
-            overflow: hidden;
-        }
-
-
-        .notification.success { border-left-color: var(--success); }
-        .notification.error { border-left-color: var(--danger); }
-        .notification.warning { border-left-color: var(--warning); }
-        .notification.info { border-left-color: var(--accent); }
-
-
-        /* Responsive Design */
-        @media (max-width: 1200px) {
-            .app-container {
-                grid-template-columns: 280px 1fr;
-            }
-        }
-
-
-        @media (max-width: 968px) {
-            .app-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .sidebar {
-                display: none;
-            }
-        }
-
-
-        @media (max-width: 640px) {
-            .chat-content {
-                padding: 20px;
-            }
-            
-            .chat-input-area {
-                padding: 20px;
-            }
-            
-            .suggestion-chips {
-                grid-template-columns: 1fr;
-            }
-
-
-            .quick-actions {
-                flex-direction: column;
-            }
-
-
-            .message-content {
-                max-width: 90%;
-            }
-        }
-
-
-        .hidden { display: none !important; }
-
-
-        /* Advanced Features Styles */
-        .command-palette {
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: var(--shadow-lg);
-            z-index: 1001;
-            min-width: 400px;
-            max-width: 90vw;
-        }
-
-
-        .command-item {
-            padding: 12px 16px;
-            border-radius: 8px;
+            justify-content: center;
             cursor: pointer;
-            transition: background 0.2s ease;
+            transition: var(--transition);
         }
 
-
-        .command-item:hover {
-            background: rgba(236, 72, 153, 0.1);
+        .btn-voice {
+            background-color: var(--success);
+            color: white;
         }
 
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: rgba(236, 72, 153, 0.1);
-            border-radius: 3px;
-            overflow: hidden;
-            margin: 10px 0;
+        .btn-send {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
         }
 
+        /* Mode Cards */
+        .mode-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 3px;
-            transition: width 0.3s ease;
+        .mode-card {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .mode-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .mode-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .mode-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .mode-description {
+            opacity: 0.9;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .col-md-6, .col-md-4, .col-md-3 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .mode-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .message-bubble {
+                max-width: 85%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .login-container {
+                padding: 1rem;
+            }
+            
+            .login-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease;
+        }
+
+        .slide-in-up {
+            animation: slideInUp 0.5s ease;
+        }
+
+        /* Loading */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem;
+        }
+
+        .loading-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading-dot:nth-child(1) { animation-delay: -0.32s; }
+        .loading-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
         }
     </style>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Enhanced Sidebar -->
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <div class="sidebar-avatar">🤖</div>
-                <div class="sidebar-title">
-                    <h1>Yume</h1>
-                    <p class="sidebar-subtitle">Powered by ORPHEO Platforms</p>
+    <!-- View de Login -->
+    <div id="login-view" class="view active">
+        <div class="login-container">
+            <div class="login-card slide-in-up">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h1>Yume AI</h1>
+                    <p>Powered by </p>
+                </div>
+
+                <div id="login-alert" class="alert" style="display: none;"></div>
+
+                <form id="login-form">
+                    <div class="form-group">
+                        <label class="form-label" for="login-email">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="login-email" class="form-control" placeholder="seu@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="login-password">Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                            <i class="fas fa-eye toggle-password" style="right: 1rem; left: auto; cursor: pointer;"></i>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100" id="login-btn">
+                        <i class="fas fa-key"></i> Entrar
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a href="#" id="toggle-register">Não tem conta? Criar agora</a>
+                </div>
+
+                <div class="text-center mt-4 text-muted small">
+                    <p><i class="fas fa-shield-alt"></i> Criptografia AES-256 + AWS + PostgreSQL</p>
+                    <p><i class="fas fa-robot"></i> Powered by Mistral AI</p>
+                    <p><i class="fas fa-heart"></i> ORPHEO Platforms v5.0</p>
                 </div>
             </div>
+        </div>
+    </div>
 
+    <!-- View de Registro -->
+    <div id="register-view" class="view">
+        <div class="login-container">
+            <div class="login-card slide-in-up">
+                <div class="login-header">
+                    <div class="login-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h1>Criar Conta</h1>
+                    <p>Junte-se à Yume AI</p>
+                </div>
 
-            <div class="mode-selector">
-                <button class="mode-btn active" data-mode="otaku">
-                    <i class="fas fa-gamepad"></i>
-                    <span>Otaku</span>
-                </button>
-                <button class="mode-btn" data-mode="productivity">
-                    <i class="fas fa-tasks"></i>
-                    <span>Produtivo</span>
-                </button>
-                <button class="mode-btn" data-mode="learning">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Aprender</span>
-                </button>
+                <div id="register-alert" class="alert" style="display: none;"></div>
+
+                <form id="register-form">
+                    <div class="form-group">
+                        <label class="form-label" for="register-name">Nome Completo</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="register-name" class="form-control" placeholder="Digite seu nome" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="register-email">Email</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="register-email" class="form-control" placeholder="seu@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="register-password">Senha</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="register-password" class="form-control" placeholder="••••••••" required>
+                            <i class="fas fa-eye toggle-password" style="right: 1rem; left: auto; cursor: pointer;"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="card">
+                            <label class="d-flex align-items-start">
+                                <input type="checkbox" id="register-terms" class="mr-2">
+                                <span class="small">
+                                    Aceito os 
+                                    <a href="https://naotodev1.github.io/terms-e-policy" target="_blank" class="text-primary">
+                                        Termos de Uso e Política de Privacidade
+                                    </a>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100" id="register-btn">
+                        <i class="fas fa-user-plus"></i> Criar Conta
+                    </button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <a href="#" id="toggle-login">Já tem uma conta? Entrar</a>
+                </div>
             </div>
+        </div>
+    </div>
 
-
-            <button class="sidebar-btn primary" id="newChatBtn">
-                <i class="fas fa-plus"></i>
-                Nova Conversa
-                <span class="feature-badge">NEW</span>
-            </button>
-
-
-            <div class="sidebar-divider"></div>
-
-
-            <!-- Otaku Mode Features -->
-            <div id="otakuMenu">
-                <button class="sidebar-btn" data-command="/anime recommend">
-                    <i class="fas fa-star"></i>
-                    Recomendações Anime
-                </button>
-                <button class="sidebar-btn" data-command="/manga trending">
-                    <i class="fas fa-chart-line"></i>
-                    Mangás em Alta
-                </button>
-                <button class="sidebar-btn" data-command="/character analyze">
-                    <i class="fas fa-user-ninja"></i>
-                    Análise de Personagem
-                </button>
-                <button class="sidebar-btn" data-command="/news anime">
-                    <i class="fas fa-newspaper"></i>
-                    Notícias Otaku
-                </button>
-                <button class="sidebar-btn" data-command="/quiz anime">
-                    <i class="fas fa-question-circle"></i>
-                    Quiz de Anime
-                </button>
+    <!-- View Principal (Dashboard) -->
+    <div id="main-view" class="view">
+        <nav class="navbar">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="navbar-brand">
+                            <i class="fas fa-brain"></i>
+                            <span>Yume AI</span>
+                        </div>
+                        <div class="ml-3">
+                            <p class="mb-0 small text-muted">Olá, <span id="user-name">Usuário</span>! 👋</p>
+                        </div>
+                    </div>
+                    <div class="navbar-nav">
+                        <button class="btn btn-secondary" id="settings-btn">
+                            <i class="fas fa-cog"></i>
+                        </button>
+                        <button class="btn btn-danger" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
             </div>
-
-
-            <!-- Productivity Mode Features -->
-            <div id="productivityMenu" class="hidden">
-                <button class="sidebar-btn" data-command="/task create">
-                    <i class="fas fa-tasks"></i>
-                    Criar Tarefas
-                </button>
-                <button class="sidebar-btn" data-command="/schedule optimize">
-                    <i class="fas fa-calendar-alt"></i>
-                    Otimizar Agenda
-                </button>
-                <button class="sidebar-btn" data-command="/pomodoro start">
-                    <i class="fas fa-clock"></i>
-                    Pomodoro Timer
-                </button>
-                <button class="sidebar-btn" data-command="/focus mode">
-                    <i class="fas fa-brain"></i>
-                    Modo Foco
-                </button>
-                <button class="sidebar-btn" data-command="/goals set">
-                    <i class="fas fa-bullseye"></i>
-                    Definir Metas
-                </button>
-            </div>
-
-
-            <!-- Learning Mode Features -->
-            <div id="learningMenu" class="hidden">
-                <button class="sidebar-btn" data-command="/learn programming">
-                    <i class="fas fa-code"></i>
-                    Aprender Programação
-                </button>
-                <button class="sidebar-btn" data-command="/tech basics">
-                    <i class="fas fa-laptop-code"></i>
-                    Básicos de Tech
-                </button>
-                <button class="sidebar-btn" data-command="/security guide">
-                    <i class="fas fa-shield-alt"></i>
-                    Guia de Segurança
-                </button>
-                <button class="sidebar-btn" data-command="/math help">
-                    <i class="fas fa-calculator"></i>
-                    Ajuda em Matemática
-                </button>
-                <button class="sidebar-btn" data-command="/language learn">
-                    <i class="fas fa-language"></i>
-                    Aprender Idiomas
-                </button>
-            </div>
-
-
-            <!-- Advanced Tools -->
-            <div class="sidebar-divider"></div>
-            <button class="sidebar-btn" data-command="/file analyze">
-                <i class="fas fa-file-upload"></i>
-                Analisar Arquivo
-            </button>
-            <button class="sidebar-btn" data-command="/code generate">
-                <i class="fas fa-terminal"></i>
-                Gerar Código
-            </button>
-            <button class="sidebar-btn" data-command="/translate text">
-                <i class="fas fa-language"></i>
-                Tradutor
-            </button>
-            <button class="sidebar-btn" data-command="/emergency help">
-                <i class="fas fa-life-ring"></i>
-                Ajuda Emergencial
-            </button>
-
-
-            <!-- Settings -->
-            <div class="sidebar-divider"></div>
-            <button class="sidebar-btn" id="profileBtn">
-                <i class="fas fa-user-cog"></i>
-                Perfil & Config
-            </button>
-            <button class="sidebar-btn" id="commandsBtn">
-                <i class="fas fa-terminal"></i>
-                Paleta de Comandos
-            </button>
-            <button class="sidebar-btn" id="logoutBtn">
-                <i class="fas fa-sign-out-alt"></i>
-                Sair
-            </button>
         </nav>
 
+        <div class="container mt-4">
+            <div class="dashboard-header">
+                <h2>Como posso ajudar? 🤖</h2>
+                <p>Escolha um modo ou comece a conversar!</p>
+            </div>
 
-        <!-- Main Chat Area -->
-        <main class="chat-area">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon text-primary">
+                        <i class="fas fa-comment"></i>
+                    </div>
+                    <div class="stat-value" id="stats-messages">0</div>
+                    <div class="stat-label">Mensagens</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon text-secondary">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <div class="stat-value" id="stats-voice">0</div>
+                    <div class="stat-label">Comandos Voz</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon text-info">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-value" id="stats-sessions">0</div>
+                    <div class="stat-label">Sessões</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon text-warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-value" id="stats-time">0m</div>
+                    <div class="stat-label">Tempo Hoje</div>
+                </div>
+            </div>
+
+            <div class="mode-grid">
+                <div class="mode-card" data-mode="otaku">
+                    <div class="mode-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="mode-title">🎌 Modo Otaku</div>
+                    <div class="mode-description">Anime & Mangá</div>
+                </div>
+                <div class="mode-card" data-mode="productivity">
+                    <div class="mode-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="mode-title">📊 Produtividade</div>
+                    <div class="mode-description">Tarefas & Organização</div>
+                </div>
+                <div class="mode-card" data-mode="learning">
+                    <div class="mode-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="mode-title">🎓 Aprendizado</div>
+                    <div class="mode-description">Tutoriais & Educação</div>
+                </div>
+                <div class="mode-card" data-mode="accessibility">
+                    <div class="mode-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="mode-title">♿ Acessibilidade</div>
+                    <div class="mode-description">Suporte & Apoio</div>
+                </div>
+            </div>
+
+            <div class="card text-center">
+                <button class="btn btn-danger btn-lg w-100" id="emergency-btn">
+                    <i class="fas fa-exclamation-triangle"></i> 🚨 EMERGÊNCIA
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View de Chat -->
+    <div id="chat-view" class="view">
+        <div class="chat-container">
             <div class="chat-header">
-                <div class="chat-status">
-                    <div class="status-indicator"></div>
-                    <span style="font-weight: 700;">Yume AI - Online</span>
-                    <span class="security-badge">
-                        <i class="fas fa-shield-alt"></i>
-                        Protegido com AES-256
-                    </span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <span id="currentMode" style="font-size: 14px; color: var(--text-muted); font-weight: 600;">Modo: Otaku</span>
-                    <div class="security-badge" style="background: linear-gradient(135deg, #3b82f6, #2563eb);">
-                        <i class="fas fa-robot"></i>
-                        Gemini AI
+                <button class="btn btn-secondary" id="back-to-main">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <div class="text-center">
+                    <h4 id="chat-mode-title">Modo Otaku</h4>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="bg-success rounded-circle mr-2" style="width: 8px; height: 8px;"></div>
+                        <small class="text-success">Mistral AI Online</small>
                     </div>
                 </div>
+                <button class="btn btn-danger" id="clear-chat">
+                    <i class="fas fa-trash"></i>
+                </button>
             </div>
 
+            <div class="chat-messages" id="chat-messages">
+                <!-- Mensagens serão adicionadas aqui dinamicamente -->
+            </div>
 
-            <div class="chat-content" id="chatContent">
-                <div class="empty-state" id="emptyState">
-                    <h2>Bem-vindo a Yume! 🚀</h2>
-                    <p style="color: var(--text-muted); margin-bottom: 32px; font-size: 18px; line-height: 1.7;">
-                        Sua assistente pessoal. Use comandos começando com <strong>/</strong> 
-                        ou explore as sugestões abaixo.
-                    </p>
-                    <div class="suggestion-chips" id="suggestionChips">
-                        <button class="suggestion-chip" data-prompt="/anime recommend action">
-                            <i class="fas fa-fist-raised"></i>
-                            Recomendar Anime de Ação
-                        </button>
-                        <button class="suggestion-chip" data-prompt="/task create study plan">
-                            <i class="fas fa-tasks"></i>
-                            Criar Plano de Estudos
-                        </button>
-                        <button class="suggestion-chip" data-prompt="/learn python basics">
-                            <i class="fas fa-code"></i>
-                            Aprender Python Básico
-                        </button>
-                        <button class="suggestion-chip" data-prompt="/emergency tech help">
-                            <i class="fas fa-life-ring"></i>
-                            Ajuda Técnica Urgente
-                        </button>
-                    </div>
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="Digite sua mensagem...">
+                <button class="btn-voice" id="voice-btn">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button class="btn-send" id="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- View de Configurações -->
+    <div id="settings-view" class="view">
+        <nav class="navbar">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-secondary" id="back-to-main-from-settings">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h4 class="mb-0">Configurações</h4>
+                    <div style="width: 40px;"></div>
                 </div>
-                <div class="messages" id="messages"></div>
             </div>
+        </nav>
 
-
-            <div class="chat-input-area">
-                <form id="chatForm">
-                    <div class="chat-input-wrapper">
-                        <textarea id="chatInput" class="chat-input" placeholder="Digite sua mensagem ou use comandos começando com / (Ex: /help)" rows="1"></textarea>
-                        <div class="input-actions">
-                            <button type="button" class="input-action-btn" id="voiceInputBtn" title="Comando de Voz">
-                                <i class="fas fa-microphone"></i>
-                            </button>
-                            <button type="button" class="input-action-btn" id="attachFileBtn" title="Anexar Arquivo">
-                                <i class="fas fa-paperclip"></i>
-                            </button>
-                            <button type="button" class="input-action-btn" id="emojiBtn" title="Inserir Emoji">
-                                <i class="fas fa-smile"></i>
-                            </button>
-                            <button type="submit" class="send-btn" id="sendBtn" title="Enviar Mensagem">
-                                <i class="fas fa-paper-plane"></i>
-                            </button>
+        <div class="container mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-user text-primary mr-2"></i> Perfil</h5>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="d-flex justify-content-between p-3 bg-light rounded">
+                            <span class="font-weight-bold">Nome</span>
+                            <span id="profile-name">Usuário</span>
                         </div>
                     </div>
-                    <div class="quick-actions">
-                        <button type="button" class="quick-action-btn" data-command="/help">
-                            <i class="fas fa-question-circle"></i>
-                            Ajuda
-                        </button>
-                        <button type="button" class="quick-action-btn" data-command="/commands list">
-                            <i class="fas fa-terminal"></i>
-                            Comandos
-                        </button>
-                        <button type="button" class="quick-action-btn" data-command="/mode switch">
-                            <i class="fas fa-sync-alt"></i>
-                            Trocar Modo
-                        </button>
-                        <button type="button" class="quick-action-btn" data-command="/clear chat">
-                            <i class="fas fa-broom"></i>
-                            Limpar Chat
-                        </button>
-                        <button type="button" class="quick-action-btn" data-command="/export chat">
-                            <i class="fas fa-download"></i>
-                            Exportar
-                        </button>
+                    <div class="col-12 mb-3">
+                        <div class="d-flex justify-content-between p-3 bg-light rounded">
+                            <span class="font-weight-bold">Email</span>
+                            <span id="profile-email">usuario@exemplo.com</span>
+                        </div>
                     </div>
-                </form>
-            </div>
-        </main>
-    </div>
-
-
-    <!-- Auth Overlay -->
-    <div id="authOverlay" class="overlay">
-        <div class="card">
-            <h2>Bem-vindo a Yume 🚀</h2>
-            <div class="form-group">
-                <label><i class="fas fa-user"></i> Nome Completo</label>
-                <input type="text" id="inputName" placeholder="Seu nome completo">
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-envelope"></i> E-mail</label>
-                <input type="email" id="inputEmail" placeholder="seu@exemplo.com">
-            </div>
-            <div class="form-group">
-                <label><i class="fas fa-lock"></i> Senha</label>
-                <input type="password" id="inputPassword" placeholder="••••••••">
-            </div>
-            
-            <div class="terms-checkbox">
-                <input type="checkbox" id="termsCheckbox">
-                <label for="termsCheckbox">
-                    Ao usar a Yume, você concorda com nossos <a href="https://naotodev1.github.io/terms-e-policy" target="_blank" class="terms-link">Termos de Uso e Condições</a>
-                </label>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-between p-3 bg-light rounded">
+                            <span class="font-weight-bold">Tipo</span>
+                            <span id="profile-role">Usuário</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-cog text-info mr-2"></i> Preferências</h5>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <div class="d-flex justify-content-between align-items-center p-3 bg-light rounded">
+                            <span class="font-weight-bold">
+                                <i class="fas fa-volume-up mr-2"></i> Respostas por Voz
+                            </span>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="voice-enabled" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label">Velocidade da Fala</label>
+                        <div class="d-flex align-items-center">
+                            <input type="range" id="speech-rate" min="0.5" max="2" step="0.1" value="1" class="flex-grow-1 mr-3">
+                            <span class="font-weight-bold" id="speech-rate-value">1x</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="card-actions">
-                <button class="btn secondary" id="authToggleBtn">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Já tenho conta
+            <div class="card">
+                <div class="card-header">
+                    <h5><i class="fas fa-chart-line text-success mr-2"></i> Suas Estatísticas</h5>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center p-3 bg-success text-white rounded">
+                            <div class="h3 font-weight-bold" id="stats-settings-messages">0</div>
+                            <div class="small">Mensagens</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center p-3 bg-info text-white rounded">
+                            <div class="h3 font-weight-bold" id="stats-settings-voice">0</div>
+                            <div class="small">Comandos Voz</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center p-3 bg-primary text-white rounded">
+                            <div class="h3 font-weight-bold" id="stats-settings-sessions">0</div>
+                            <div class="small">Sessões</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="text-center p-3 bg-warning text-white rounded">
+                            <div class="h3 font-weight-bold" id="stats-settings-time">0m</div>
+                            <div class="small">Tempo Total</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card" id="admin-panel-btn" style="display: none;">
+                <button class="btn btn-warning btn-lg w-100" id="admin-btn">
+                    <i class="fas fa-shield-alt"></i> Painel de Administrador
                 </button>
-                <button class="btn primary" id="authActionBtn">
-                    <i class="fas fa-user-plus"></i>
-                    Cadastrar
+            </div>
+
+            <div class="card">
+                <button class="btn btn-danger btn-lg w-100" id="logout-from-settings">
+                    <i class="fas fa-sign-out-alt"></i> Sair da Conta
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- View de Emergência -->
+    <div id="emergency-view" class="view">
+        <div class="login-container" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+            <div class="login-card slide-in-up">
+                <div class="login-header">
+                    <div class="login-icon" style="font-size: 3rem;">🚨</div>
+                    <h2>EMERGÊNCIA</h2>
+                    <p>Números importantes:</p>
+                </div>
 
-    <!-- Command Palette -->
-    <div id="commandPalette" class="command-palette hidden">
-        <h3 style="margin-bottom: 16px;"><i class="fas fa-terminal"></i> Paleta de Comandos</h3>
-        <input type="text" id="commandSearch" placeholder="Digite para buscar comandos..." style="width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 16px;">
-        <div id="commandList">
-            <!-- Commands will be populated here -->
+                <div class="mb-4">
+                    <a href="tel:192" class="btn btn-danger btn-lg w-100 mb-3">
+                        SAMU - 192
+                    </a>
+                    <a href="tel:193" class="btn btn-danger btn-lg w-100 mb-3">
+                        BOMBEIROS - 193
+                    </a>
+                    <a href="tel:190" class="btn btn-danger btn-lg w-100 mb-3">
+                        POLÍCIA - 190
+                    </a>
+                </div>
+
+                <button class="btn btn-secondary btn-lg w-100" id="back-from-emergency">
+                    Voltar
+                </button>
+            </div>
         </div>
     </div>
 
+    <!-- View de Administrador -->
+    <div id="admin-view" class="view">
+        <nav class="navbar">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-secondary" id="back-from-admin">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h4 class="mb-0">Painel de Administrador</h4>
+                    <div style="width: 40px;"></div>
+                </div>
+            </div>
+        </nav>
 
-    <!-- Notification Container -->
-    <div class="notification-container" id="notificationContainer"></div>
+        <div class="container mt-4">
+            <div class="dashboard-header" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">
+                <h2>Métricas Globais do Sistema</h2>
+                <p>Controle total sobre o uso da plataforma</p>
+            </div>
 
+            <div class="row mb-4">
+                <div class="col-md-4 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon text-warning">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-value" id="admin-users">0</div>
+                        <div class="stat-label">Usuários Ativos</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon text-danger">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <div class="stat-value" id="admin-messages">0</div>
+                        <div class="stat-label">Total Mensagens</div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="stat-card">
+                        <div class="stat-icon text-primary">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="stat-value" id="admin-sessions">0</div>
+                        <div class="stat-label">Total Sessões</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5>Usuários Detalhados</h5>
+                </div>
+                <div class="card-body">
+                    <div id="admin-user-list">
+                        <p class="text-center text-muted py-4">Nenhum dado de usuário disponível</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // ===== Yume AI Super Assistant - Complete Implementation =====
-        class YumeAI {
-            constructor() {
-                this.currentUser = null;
-                this.currentMode = 'otaku';
-                this.currentChat = [];
-                this.isProcessing = false;
-                this.commands = this.initializeCommands();
-                this.initializeApp();
+        // Configurações
+        const CONFIG = {
+            MISTRAL_API: 'https://api.mistral.ai/v1/chat/completions',
+            MISTRAL_KEY: 'JGx0CZOrbKgvGdykjcfdwKiKM8oobhvC',
+            ENCRYPTION_KEY: 'yume-ai-secure-key-2025'
+        };
+
+        // Estado da aplicação
+        let state = {
+            isAuthenticated: false,
+            user: null,
+            isAdmin: false,
+            currentView: 'login',
+            currentMode: 'otaku',
+            messages: [],
+            chatHistory: [],
+            metrics: {
+                messagesCount: 0,
+                voiceCommandsCount: 0,
+                sessionDuration: 0,
+                lastActive: new Date().toISOString(),
+                totalSessions: 0,
+                favoriteMode: 'otaku'
+            },
+            preferences: {
+                fontSize: 'normal',
+                theme: 'light',
+                speechRate: 1,
+                voiceEnabled: true,
+                soundEnabled: true
+            },
+            adminMetrics: []
+        };
+
+        // Elementos DOM
+        const elements = {
+            // Views
+            views: {
+                login: document.getElementById('login-view'),
+                register: document.getElementById('register-view'),
+                main: document.getElementById('main-view'),
+                chat: document.getElementById('chat-view'),
+                settings: document.getElementById('settings-view'),
+                emergency: document.getElementById('emergency-view'),
+                admin: document.getElementById('admin-view')
+            },
+            
+            // Login/Register
+            loginForm: document.getElementById('login-form'),
+            registerForm: document.getElementById('register-form'),
+            loginAlert: document.getElementById('login-alert'),
+            registerAlert: document.getElementById('register-alert'),
+            toggleRegister: document.getElementById('toggle-register'),
+            toggleLogin: document.getElementById('toggle-login'),
+            loginBtn: document.getElementById('login-btn'),
+            registerBtn: document.getElementById('register-btn'),
+            
+            // Main
+            userName: document.getElementById('user-name'),
+            statsMessages: document.getElementById('stats-messages'),
+            statsVoice: document.getElementById('stats-voice'),
+            statsSessions: document.getElementById('stats-sessions'),
+            statsTime: document.getElementById('stats-time'),
+            modeCards: document.querySelectorAll('.mode-card'),
+            emergencyBtn: document.getElementById('emergency-btn'),
+            settingsBtn: document.getElementById('settings-btn'),
+            logoutBtn: document.getElementById('logout-btn'),
+            
+            // Chat
+            chatMessages: document.getElementById('chat-messages'),
+            messageInput: document.getElementById('message-input'),
+            voiceBtn: document.getElementById('voice-btn'),
+            sendBtn: document.getElementById('send-btn'),
+            backToMain: document.getElementById('back-to-main'),
+            clearChat: document.getElementById('clear-chat'),
+            chatModeTitle: document.getElementById('chat-mode-title'),
+            
+            // Settings
+            backToMainFromSettings: document.getElementById('back-to-main-from-settings'),
+            profileName: document.getElementById('profile-name'),
+            profileEmail: document.getElementById('profile-email'),
+            profileRole: document.getElementById('profile-role'),
+            voiceEnabled: document.getElementById('voice-enabled'),
+            speechRate: document.getElementById('speech-rate'),
+            speechRateValue: document.getElementById('speech-rate-value'),
+            statsSettingsMessages: document.getElementById('stats-settings-messages'),
+            statsSettingsVoice: document.getElementById('stats-settings-voice'),
+            statsSettingsSessions: document.getElementById('stats-settings-sessions'),
+            statsSettingsTime: document.getElementById('stats-settings-time'),
+            adminPanelBtn: document.getElementById('admin-panel-btn'),
+            adminBtn: document.getElementById('admin-btn'),
+            logoutFromSettings: document.getElementById('logout-from-settings'),
+            
+            // Emergency
+            backFromEmergency: document.getElementById('back-from-emergency'),
+            
+            // Admin
+            backFromAdmin: document.getElementById('back-from-admin'),
+            adminUsers: document.getElementById('admin-users'),
+            adminMessages: document.getElementById('admin-messages'),
+            adminSessions: document.getElementById('admin-sessions'),
+            adminUserList: document.getElementById('admin-user-list')
+        };
+
+        // Utilitários de Criptografia (simplificados para demonstração)
+        const CryptoUtils = {
+            async encryptData(data) {
+                // Em uma implementação real, isso seria criptografado
+                return btoa(JSON.stringify(data));
+            },
+
+            async decryptData(encrypted) {
+                // Em uma implementação real, isso seria descriptografado
+                try {
+                    return JSON.parse(atob(encrypted));
+                } catch (e) {
+                    return null;
+                }
+            },
+
+            async hashPassword(password) {
+                // Hash simples para demonstração
+                let hash = 0;
+                for (let i = 0; i < password.length; i++) {
+                    const char = password.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & hash;
+                }
+                return Math.abs(hash).toString(16);
             }
+        };
 
-
-            initializeCommands() {
-                return {
-                    // Anime & Manga Commands
-                    '/anime recommend': {
-                        description: 'Recomendar animes baseado em gênero',
-                        usage: '/anime recommend [gênero]',
-                        examples: ['/anime recommend action', '/anime recommend romance']
-                    },
-                    '/manga trending': {
-                        description: 'Mostrar mangás populares',
-                        usage: '/manga trending',
-                        examples: []
-                    },
-                    '/character analyze': {
-                        description: 'Analisar personagem de anime',
-                        usage: '/character analyze [nome]',
-                        examples: ['/character analyze Naruto Uzumaki']
-                    },
-
-
-                    // Productivity Commands
-                    '/task create': {
-                        description: 'Criar sistema de tarefas',
-                        usage: '/task create [descrição]',
-                        examples: ['/task create projeto importante']
-                    },
-                    '/schedule optimize': {
-                        description: 'Otimizar agenda semanal',
-                        usage: '/schedule optimize',
-                        examples: []
-                    },
-                    '/pomodoro start': {
-                        description: 'Iniciar técnica Pomodoro',
-                        usage: '/pomodoro start',
-                        examples: []
-                    },
-
-
-                    // Learning Commands
-                    '/learn programming': {
-                        description: 'Criar plano de aprendizado',
-                        usage: '/learn programming [linguagem]',
-                        examples: ['/learn programming python']
-                    },
-                    '/tech basics': {
-                        description: 'Ensinar conceitos básicos de tecnologia',
-                        usage: '/tech basics [tópico]',
-                        examples: ['/tech basics internet']
-                    },
-                    '/math help': {
-                        description: 'Ajuda com matemática',
-                        usage: '/math help [tópico]',
-                        examples: ['/math help algebra']
-                    },
-
-
-                    // Utility Commands
-                    '/translate': {
-                        description: 'Traduzir texto',
-                        usage: '/translate [texto] para [idioma]',
-                        examples: ['/translate hello para português']
-                    },
-                    '/code generate': {
-                        description: 'Gerar código',
-                        usage: '/code generate [linguagem] [funcionalidade]',
-                        examples: ['/code generate python calculadora']
-                    },
-                    '/file analyze': {
-                        description: 'Analisar conteúdo de arquivo',
-                        usage: '/file analyze',
-                        examples: []
-                    },
-
-
-                    // System Commands
-                    '/help': {
-                        description: 'Mostrar ajuda geral',
-                        usage: '/help',
-                        examples: []
-                    },
-                    '/commands': {
-                        description: 'Listar todos os comandos',
-                        usage: '/commands',
-                        examples: []
-                    },
-                    '/mode': {
-                        description: 'Trocar modo de operação',
-                        usage: '/mode [otaku|productivity|learning]',
-                        examples: ['/mode productivity']
-                    },
-                    '/clear': {
-                        description: 'Limpar conversa atual',
-                        usage: '/clear',
-                        examples: []
-                    }
+        // Serviço Mistral AI (simulado)
+        const MistralService = {
+            async chat(message, mode = 'otaku', history = []) {
+                const systemPrompts = {
+                    otaku: 'Você é Yume, uma assistente kawaii especializada em anime, mangá, cultura otaku e ajudar pessoas com pouca ou nenhuma compreensão da tecnologia. Seja amigável, use emojis e dê recomendações e ajuda personalizada personalizadas.',
+                    productivity: 'Você é Yume, uma assistente de produtividade. Ajude com tarefas, organização, técnicas Pomodoro e gestão de tempo de forma clara e motivadora.',
+                    learning: 'Você é Yume, uma tutora paciente e didática. Explique conceitos complexos de forma simples, com exemplos práticos e exercícios.',
+                    accessibility: 'Você é Yume, uma assistente voltada para idosos e acessibilidade. Use linguagem simples, clara e seja extremamente paciente. Ofereça suporte emocional.'
                 };
+
+                // Simulação de resposta da API
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        const responses = {
+                            otaku: `Olá! 👋 Como sua assistente otaku, posso te ajudar com recomendações de anime, mangá ou qualquer coisa relacionada à cultura japonesa! O que você gostaria de saber? 🎌`,
+                            productivity: `Olá! 📊 Estou aqui para ajudar você a ser mais produtivo. Posso ajudar com organização de tarefas, técnicas de estudo ou gestão do tempo. Como posso ajudar?`,
+                            learning: `Olá! 🎓 Como sua tutora, posso explicar conceitos complexos de forma simples. Sobre qual assunto você gostaria de aprender hoje?`,
+                            accessibility: `Olá! ♿ Estou aqui para oferecer suporte com paciência e cuidado. Como posso ajudar você hoje?`
+                        };
+                        
+                        const baseResponse = responses[mode] || 'Olá! Como posso ajudar você hoje?';
+                        resolve(`${baseResponse}\n\nVocê disse: "${message}"`);
+                    }, 1500);
+                });
             }
+        };
 
+        // Serviço AWS (simulado com localStorage)
+        const AWSService = {
+            async saveUserData(userId, data) {
+                const encrypted = await CryptoUtils.encryptData(data);
+                localStorage.setItem(`aws_user_${userId}`, encrypted);
+                return true;
+            },
 
-            initializeApp() {
-                this.setupEventListeners();
-                this.loadUser();
-                this.updateUI();
-                this.showWelcomeMessage();
-            }
+            async getUserData(userId) {
+                const encrypted = localStorage.getItem(`aws_user_${userId}`);
+                if (!encrypted) return null;
+                return await CryptoUtils.decryptData(encrypted);
+            },
 
+            async saveMetrics(userId, metrics) {
+                const encrypted = await CryptoUtils.encryptData(metrics);
+                localStorage.setItem(`aws_metrics_${userId}`, encrypted);
+                return true;
+            },
 
-            setupEventListeners() {
-                // Auth events
-                document.getElementById('authToggleBtn').addEventListener('click', () => this.toggleAuthMode());
-                document.getElementById('authActionBtn').addEventListener('click', () => this.handleAuth());
+            async getMetrics(userId) {
+                const encrypted = localStorage.getItem(`aws_metrics_${userId}`);
+                if (!encrypted) return null;
+                return await CryptoUtils.decryptData(encrypted);
+            },
 
-
-                // Chat events
-                document.getElementById('chatForm').addEventListener('submit', (e) => this.handleSendMessage(e));
-                document.getElementById('chatInput').addEventListener('keydown', (e) => this.handleInputKeydown(e));
-                document.getElementById('chatInput').addEventListener('input', (e) => this.handleInputChange(e));
-
-
-                // Mode switching
-                document.querySelectorAll('.mode-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => this.switchMode(e.target.closest('.mode-btn').dataset.mode));
-                });
-
-
-                // Command buttons
-                document.querySelectorAll('[data-command]').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const command = e.target.closest('[data-command]').dataset.command;
-                        this.executeCommand(command);
-                    });
-                });
-
-
-                // Quick actions
-                document.querySelectorAll('.quick-action-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const command = e.target.closest('.quick-action-btn').dataset.command;
-                        this.executeCommand(command);
-                    });
-                });
-
-
-                // Suggestion chips
-                document.querySelectorAll('.suggestion-chip').forEach(chip => {
-                    chip.addEventListener('click', (e) => {
-                        const prompt = e.target.closest('.suggestion-chip').dataset.prompt;
-                        this.executeCommand(prompt);
-                    });
-                });
-
-
-                // Voice input
-                document.getElementById('voiceInputBtn').addEventListener('click', () => this.startVoiceInput());
-
-
-                // Command palette
-                document.getElementById('commandsBtn').addEventListener('click', () => this.showCommandPalette());
-                document.addEventListener('keydown', (e) => {
-                    if (e.ctrlKey && e.key === 'k') {
-                        e.preventDefault();
-                        this.showCommandPalette();
+            async getAdminMetrics() {
+                const allUsers = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key?.startsWith('aws_metrics_')) {
+                        const data = localStorage.getItem(key);
+                        if (data) {
+                            const decrypted = await CryptoUtils.decryptData(data);
+                            allUsers.push(decrypted);
+                        }
                     }
-                });
-
-
-                // Logout
-                document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
+                }
+                return allUsers;
             }
+        };
 
-
-            async handleSendMessage(e) {
-                e.preventDefault();
-                const input = document.getElementById('chatInput');
-                const message = input.value.trim();
+        // Funções de UI
+        const UI = {
+            showView(viewName) {
+                // Esconder todas as views
+                Object.values(elements.views).forEach(view => {
+                    view.classList.remove('active');
+                });
                 
-                if (!message) return;
-
-
-                if (message.startsWith('/')) {
-                    await this.executeCommand(message);
-                } else {
-                    await this.sendMessage(message);
+                // Mostrar a view solicitada
+                if (elements.views[viewName]) {
+                    elements.views[viewName].classList.add('active');
+                    state.currentView = viewName;
                 }
+            },
 
+            showAlert(alertElement, message, type = 'danger') {
+                alertElement.textContent = message;
+                alertElement.className = `alert alert-${type}`;
+                alertElement.style.display = 'flex';
+                
+                // Auto-esconder após 5 segundos
+                setTimeout(() => {
+                    alertElement.style.display = 'none';
+                }, 5000);
+            },
 
-                input.value = '';
-                this.adjustTextareaHeight();
-            }
-
-
-            async sendMessage(message) {
-                this.addMessage('user', message);
-                this.showTypingIndicator();
-
-
-                try {
-                  // Agora a função generateAIResponse chama a Mistral
-async generateAIResponse(message) {
-    const response = await fetch("https://api.mistral.ai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer JGx0CZOrbKgvGdykjcfdwKiKM8oobhvC`
-        },
-        body: JSON.stringify({
-            model: "mistral-small-latest", 
-            messages: [
-                { role: "system", content: "Você é a Yume, um assistente de animes e mangás kawaii e estilosa." },
-                { role: "user", content: message }
-            ]
-        })
-    });
-
-    const data = await response.json();
-
-    // Retorna a resposta gerada pela Mistral
-    return data.choices[0].message.content;
-}
-
-// E no código principal:
-try {
-    this.showTypingIndicator();
-
-    const response = await this.generateAIResponse(message);
-
-    this.hideTypingIndicator();
-    this.addMessage('yume', response, { showActions: true });
-
-} catch (error) {
-    this.hideTypingIndicator();
-    this.addMessage('yume', `❌ Erro: ${error.message}`);
-}
-            }
-
-
-            generateAIResponse(message) {
-                const responses = {
-                    greeting: `👋 Olá! Sou a Yume, sua assistente! 
-Posso ajudar você com animes, produtividade, aprendizado e muito mais. 
-Use comandos começando com \`/\` ou explore os menus laterais!`,
-
-
-                    default: `🤖 Entendi sua mensagem: "${message}"
-    
-Posso ajudar você com:
-🎌 **Animes e Mangás** - Recomendações, análises, notícias
-📊 **Produtividade** - Tarefas, agenda, técnicas de estudo
-🎓 **Aprendizado** - Programação, tecnologia, matemática
-⚡ **Ferramentas** - Tradução, código, análise de arquivos
-
-
-Experimente usar \`/help\` para ver todos os comandos disponíveis!`
-                };
-
-
-                const lowerMessage = message.toLowerCase();
-                if (lowerMessage.includes('oi') || lowerMessage.includes('olá') || lowerMessage.includes('hello')) {
-                    return responses.greeting;
-                }
-
-
-                return responses.default;
-            }
-
-
-            async executeCommand(command) {
-                this.addMessage('user', command);
-                this.showTypingIndicator();
-
-
-                try {
-                    let response;
+            updateUserInfo() {
+                if (state.user) {
+                    elements.userName.textContent = state.user.name;
+                    elements.profileName.textContent = state.user.name;
+                    elements.profileEmail.textContent = state.user.email;
+                    elements.profileRole.textContent = state.user.role === 'admin' ? 'Administrador' : 'Usuário';
                     
-                    if (command.startsWith('/anime recommend')) {
-                        response = await this.handleAnimeRecommendation(command);
-                    } else if (command.startsWith('/manga trending')) {
-                        response = await this.handleMangaTrending();
-                    } else if (command.startsWith('/character analyze')) {
-                        response = await this.handleCharacterAnalysis(command);
-                    } else if (command.startsWith('/task create')) {
-                        response = await this.handleTaskCreation(command);
-                    } else if (command.startsWith('/learn programming')) {
-                        response = await this.handleProgrammingLearning(command);
-                    } else if (command.startsWith('/translate')) {
-                        response = await this.handleTranslation(command);
-                    } else if (command.startsWith('/code generate')) {
-                        response = await this.handleCodeGeneration(command);
-                    } else if (command === '/help') {
-                        response = this.showHelp();
-                    } else if (command === '/commands') {
-                        response = this.showAllCommands();
-                    } else if (command.startsWith('/mode')) {
-                        response = this.handleModeSwitch(command);
-                    } else if (command === '/clear') {
-                        this.clearChat();
-                        return;
-                    } else {
-                        response = "Comando não reconhecido. Use `/help` para ver todos os comandos disponíveis.";
+                    // Mostrar painel de admin se for admin
+                    if (state.user.role === 'admin') {
+                        elements.adminPanelBtn.style.display = 'block';
                     }
-
-
-                    this.hideTypingIndicator();
-                    this.addMessage('yume', response, { showActions: true });
-                } catch (error) {
-                    this.hideTypingIndicator();
-                    this.addMessage('yume', `❌ Erro ao executar comando: ${error.message}`);
                 }
-            }
+            },
 
-
-            // Command Handlers
-            async handleAnimeRecommendation(command) {
-                const genre = command.replace('/anime recommend', '').trim() || 'action';
-                return `🎌 **Recomendações de Anime - ${genre.toUpperCase()}**\n\n` +
-                       `Baseado no gênero ${genre}, aqui estão minhas recomendações:\n\n` +
-                       `**1. Demon Slayer** ⚔️\n` +
-                       `• *Estúdio:* ufotable\n` +
-                       `• *Nota:* 8.6/10\n` +
-                       `• *Por que assistir:* Animação espetacular e história emocionante\n\n` +
-                       `**2. Jujutsu Kaisen** 🎭\n` +
-                       `• *Estúdio:* MAPPA\n` +
-                       `• *Nota:* 8.7/10\n` +
-                       `• *Por que assistir:* Sistema de poderes único e personagens carismáticos\n\n` +
-                       `**3. Attack on Titan** 🧱\n` +
-                       `• *Estúdio:* Wit Studio / MAPPA\n` +
-                       `• *Nota:* 9.0/10\n` +
-                       `• *Por que assistir:* Narrativa complexa e reviravoltas incríveis\n\n` +
-                       `💡 *Dica:* Use \`/character analyze\` para análise detalhada de personagens!`;
-            }
-
-
-            async handleMangaTrending() {
-                return `📚 **Mangás em Alta Esta Semana**\n\n` +
-                       `**1. One Piece** 🏴‍☠️\n` +
-                       `• *Autor:* Eiichiro Oda\n` +
-                       `• *Gênero:* Aventura, Fantasia\n` +
-                       `• *Status:* Em andamento\n\n` +
-                       `**2. Chainsaw Man** 🔥\n` +
-                       `• *Autor:* Tatsuki Fujimoto\n` +
-                       `• *Gênero:* Ação, Horror\n` +
-                       `• *Status:* Parte 2 em andamento\n\n` +
-                       `**3. Jujutsu Kaisen** ⚡\n` +
-                       `• *Autor:* Gege Akutami\n` +
-                       `• *Gênero:* Ação, Sobrenatural\n` +
-                       `• *Status:* Em andamento\n\n` +
-                       `🎯 *Recomendação Pessoal:* Berserk - Uma obra prima do terror fantástico!`;
-            }
-
-
-            async handleCharacterAnalysis(command) {
-                const character = command.replace('/character analyze', '').trim() || 'Naruto Uzumaki';
-                return `🎭 **Análise do Personagem: ${character}**\n\n` +
-                       `**Desenvolvimento:**\n` +
-                       `• Evolução desde o início da série\n` +
-                       `• Momentos decisivos de crescimento\n` +
-                       `• Relacionamentos importantes\n\n` +
-                       `**Motivações:**\n` +
-                       `• Desejo de ser reconhecido\n` +
-                       `• Proteger amigos e aldeia\n` +
-                       `• Busca por paz mundial\n\n` +
-                       `**Habilidades:**\n` +
-                       `• Rasengan\n` +
-                       `• Modo Sábio dos Seis Caminhos\n` +
-                       `• Jinchuriki das Nove-Caudas\n\n` +
-                       `💫 *Curiosidade:* ${character} é um dos personagens mais icônicos do anime!`;
-            }
-
-
-            async handleTaskCreation(command) {
-                const task = command.replace('/task create', '').trim() || 'projeto importante';
-                return `✅ **Sistema de Tarefas Criado**\n\n` +
-                       `**Tarefa Principal:** ${task}\n\n` +
-                       `**Sub-tarefas Sugeridas:**\n` +
-                       `1. 🔍 Pesquisa inicial (2 horas)\n` +
-                       `2. 📝 Planejamento detalhado (1 hora)\n` +
-                       `3. 🛠️ Implementação (4 horas)\n` +
-                       `4. 🧪 Testes e ajustes (2 horas)\n` +
-                       `5. 📊 Revisão final (1 hora)\n\n` +
-                       `**Técnicas Recomendadas:**\n` +
-                       `• 🍅 Pomodoro (25min trabalho + 5min pausa)\n` +
-                       `• 🎯 Método Eisenhower (urgente/importante)\n` +
-                       `• 📈 Time blocking (blocos de tempo)\n\n` +
-                       `💡 *Dica:* Use \`/pomodoro start\` para iniciar uma sessão focada!`;
-            }
-
-
-            async handleProgrammingLearning(command) {
-                const language = command.replace('/learn programming', '').trim() || 'Python';
-                return `💻 **Plano de Aprendizado: ${language}**\n\n` +
-                       `**Semana 1-2: Fundamentos**\n` +
-                       `• Sintaxe básica e variáveis\n` +
-                       `• Estruturas de controle (if, for, while)\n` +
-                       `• Funções e módulos\n\n` +
-                       `**Semana 3-4: Conceitos Intermediários**\n` +
-                       `• Estruturas de dados (listas, dicionários)\n` +
-                       `• Programação orientada a objetos\n` +
-                       `• Manipulação de arquivos\n\n` +
-                       `**Semana 5-6: Projetos Práticos**\n` +
-                       `• Projeto 1: Calculadora\n` +
-                       `• Projeto 2: Jogo simples\n` +
-                       `• Projeto 3: API básica\n\n` +
-                       `**Recursos Recomendados:**\n` +
-                       `• 📚 Documentação oficial\n` +
-                       `• 🎥 Tutoriais em vídeo\n` +
-                       `• 💼 Projetos open-source\n\n` +
-                       `🚀 *Bônus:* Pratique diariamente por 30 minutos!`;
-            }
-
-
-            async handleTranslation(command) {
-                const text = command.replace('/translate', '').trim();
-                return `🌐 **Tradução Realizada**\n\n` +
-                       `**Texto Original:**\n${text || "Hello, how are you?"}\n\n` +
-                       `**Tradução (Português):**\n` +
-                       `Olá, como você está?\n\n` +
-                       `**Tradução (Espanhol):**\n` +
-                       `Hola, ¿cómo estás?\n\n` +
-                       `**Tradução (Francês):**\n` +
-                       `Bonjour, comment ça va?\n\n` +
-                       `💡 *Dica:* Para traduções específicas, use: \`/translate [texto] para [idioma]\``;
-            }
-
-
-            async handleCodeGeneration(command) {
-                const params = command.replace('/code generate', '').trim().split(' ');
-                const language = params[0] || 'python';
-                const functionality = params.slice(1).join(' ') || 'hello world';
+            updateMetrics() {
+                elements.statsMessages.textContent = state.metrics.messagesCount;
+                elements.statsVoice.textContent = state.metrics.voiceCommandsCount;
+                elements.statsSessions.textContent = state.metrics.totalSessions;
+                elements.statsTime.textContent = `${Math.floor(state.metrics.sessionDuration / 60)}m`;
                 
-                return `💾 **Código Gerado - ${language}**\n\n` +
-                       `**Funcionalidade:** ${functionality}\n\n` +
-                       `\`\`\`${language}\n` +
-                       this.generateSampleCode(language, functionality) +
-                       `\n\`\`\`\n\n` +
-                       `📝 *Explicação:* Este código demonstra os conceitos básicos de ${functionality} em ${language}.`;
-            }
+                elements.statsSettingsMessages.textContent = state.metrics.messagesCount;
+                elements.statsSettingsVoice.textContent = state.metrics.voiceCommandsCount;
+                elements.statsSettingsSessions.textContent = state.metrics.totalSessions;
+                elements.statsSettingsTime.textContent = `${Math.floor(state.metrics.sessionDuration / 60)}m`;
+            },
 
-
-            generateSampleCode(language, functionality) {
-                const samples = {
-                    python: `def ${functionality.replace(' ', '_')}():\n    print("Hello, World!")\n\n# Exemplo de uso\nif __name__ == "__main__":\n    ${functionality.replace(' ', '_')}()`,
-                    javascript: `function ${functionality.replace(' ', '')}() {\n    console.log("Hello, World!");\n}\n\n// Exemplo de uso\n${functionality.replace(' ', '')}();`,
-                    html: `<!DOCTYPE html>\n<html>\n<head>\n    <title>${functionality}</title>\n</head>\n<body>\n    <h1>Hello, World!</h1>\n</body>\n</html>`
-                };
+            renderMessages() {
+                elements.chatMessages.innerHTML = '';
                 
-                return samples[language] || samples.python;
-            }
-
-
-            showHelp() {
-                return `🆘 **Sistema de Ajuda do Yume AI**\n\n` +
-                       `**Comandos Disponíveis:**\n\n` +
-                       `🎌 **Modo Otaku**\n` +
-                       `• \`/anime recommend\` - Recomendações de anime\n` +
-                       `• \`/manga trending\` - Mangás populares\n` +
-                       `• \`/character analyze\` - Análise de personagens\n\n` +
-                       `📊 **Modo Produtividade**\n` +
-                       `• \`/task create\` - Criar sistema de tarefas\n` +
-                       `• \`/schedule optimize\` - Otimizar agenda\n` +
-                       `• \`/pomodoro start\` - Técnica Pomodoro\n\n` +
-                       `🎓 **Modo Aprendizado**\n` +
-                       `• \`/learn programming\` - Aprender programação\n` +
-                       `• \`/tech basics\` - Conceitos de tecnologia\n` +
-                       `• \`/math help\` - Ajuda com matemática\n\n` +
-                       `⚡ **Comandos Gerais**\n` +
-                       `• \`/help\` - Mostrar esta ajuda\n` +
-                       `• \`/commands\` - Listar todos os comandos\n` +
-                       `• \`/mode\` - Trocar modo\n` +
-                       `• \`/clear\` - Limpar chat\n\n` +
-                       `💡 *Dica:* Use \`Ctrl+K\` para abrir a paleta de comandos rapidamente!`;
-            }
-
-
-            showAllCommands() {
-                let commandsText = `⌨️ **Todos os Comandos Disponíveis**\n\n`;
-                
-                Object.entries(this.commands).forEach(([command, info]) => {
-                    commandsText += `**${command}**\n`;
-                    commandsText += `• *Descrição:* ${info.description}\n`;
-                    commandsText += `• *Uso:* ${info.usage}\n`;
-                    if (info.examples.length > 0) {
-                        commandsText += `• *Exemplos:* ${info.examples.join(', ')}\n`;
-                    }
-                    commandsText += '\n';
-                });
-
-
-                return commandsText;
-            }
-
-
-            handleModeSwitch(command) {
-                const mode = command.replace('/mode', '').trim();
-                if (['otaku', 'productivity', 'learning'].includes(mode)) {
-                    this.switchMode(mode);
-                    return `🔄 **Modo alterado para:** ${mode}\n\n` +
-                           `Agora você tem acesso a todas as funcionalidades do modo ${mode}!`;
-                } else {
-                    return `❌ Modo inválido. Use: \`/mode otaku\`, \`/mode productivity\` ou \`/mode learning\``;
-                }
-            }
-
-
-            // UI Methods
-            addMessage(type, content, options = {}) {
-                const messagesContainer = document.getElementById('messages');
-                const messageDiv = document.createElement('div');
-                messageDiv.className = `message ${type}`;
-
-
-                const avatar = document.createElement('div');
-                avatar.className = 'message-avatar';
-                avatar.innerHTML = type === 'user' ? '<i class="fas fa-user"></i>' : '<i class="fas fa-robot"></i>';
-
-
-                const messageContent = document.createElement('div');
-                messageContent.className = 'message-content';
-                messageContent.innerHTML = this.formatMessage(content);
-
-
-                if (type === 'yume' && options.showActions) {
-                    const actionsDiv = document.createElement('div');
-                    actionsDiv.className = 'message-actions';
-                    actionsDiv.innerHTML = `
-                        <button class="message-action-btn" onclick="yumeAI.copyMessage('${this.escapeHtml(content)}')">
-                            <i class="fas fa-copy"></i> Copiar
-                        </button>
-                        <button class="message-action-btn" onclick="yumeAI.speakMessage('${this.escapeHtml(content)}')">
-                            <i class="fas fa-volume-up"></i> Ouvir
-                        </button>
-                        <button class="message-action-btn" onclick="yumeAI.shareMessage('${this.escapeHtml(content)}')">
-                            <i class="fas fa-share"></i> Compartilhar
-                        </button>
-                    `;
-                    messageContent.appendChild(actionsDiv);
-                }
-
-
-                const time = document.createElement('div');
-                time.className = 'message-time';
-                time.textContent = new Date().toLocaleTimeString('pt-BR', { 
-                    hour: '2-digit', 
-                    minute: '2-digit' 
-                });
-
-
-                messageContent.appendChild(time);
-                messageDiv.appendChild(avatar);
-                messageDiv.appendChild(messageContent);
-                messagesContainer.appendChild(messageDiv);
-
-
-                this.scrollToBottom();
-                document.getElementById('emptyState').classList.add('hidden');
-            }
-
-
-            formatMessage(content) {
-                // Convert markdown-like syntax to HTML
-                return content
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                    .replace(/`(.*?)`/g, '<code>$1</code>')
-                    .replace(/\n/g, '<br>')
-                    .replace(/•/g, '•')
-                    .replace(/🎌/g, '🎌')
-                    .replace(/📚/g, '📚')
-                    .replace(/💻/g, '💻')
-                    .replace(/✅/g, '✅');
-            }
-
-
-            escapeHtml(text) {
-                const div = document.createElement('div');
-                div.textContent = text;
-                return div.innerHTML;
-            }
-
-
-            showTypingIndicator() {
-                const messagesContainer = document.getElementById('messages');
-                const typingDiv = document.createElement('div');
-                typingDiv.className = 'message yume';
-                typingDiv.id = 'typing-indicator';
-
-
-                typingDiv.innerHTML = `
-                    <div class="message-avatar"><i class="fas fa-robot"></i></div>
-                    <div class="message-content">
-                        <div class="ai-thinking">
+                if (state.messages.length === 0) {
+                    // Mensagem de boas-vindas
+                    const welcomeMsg = document.createElement('div');
+                    welcomeMsg.className = 'message yume';
+                    welcomeMsg.innerHTML = `
+                        <div class="message-avatar">
                             <i class="fas fa-brain"></i>
-                            Yume está digitando...
-                            <div class="typing-indicator">
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
-                                <div class="typing-dot"></div>
-                            </div>
                         </div>
-                    </div>
-                `;
-
-
-                messagesContainer.appendChild(typingDiv);
-                this.scrollToBottom();
-            }
-
-
-            hideTypingIndicator() {
-                const typingIndicator = document.getElementById('typing-indicator');
-                if (typingIndicator) {
-                    typingIndicator.remove();
-                }
-            }
-
-
-            scrollToBottom() {
-                const chatContent = document.getElementById('chatContent');
-                chatContent.scrollTop = chatContent.scrollHeight;
-            }
-
-
-            clearChat() {
-                document.getElementById('messages').innerHTML = '';
-                document.getElementById('emptyState').classList.remove('hidden');
-                this.currentChat = [];
-            }
-
-
-            // Command Palette
-            showCommandPalette() {
-                const palette = document.getElementById('commandPalette');
-                const search = document.getElementById('commandSearch');
-                const list = document.getElementById('commandList');
-
-
-                // Populate command list
-                list.innerHTML = '';
-                Object.entries(this.commands).forEach(([command, info]) => {
-                    const item = document.createElement('div');
-                    item.className = 'command-item';
-                    item.innerHTML = `
-                        <div><strong>${command}</strong></div>
-                        <div style="font-size: 12px; color: var(--text-muted);">${info.description}</div>
+                        <div class="message-bubble">
+                            <p>Olá, ${state.user?.name}! Como posso te ajudar hoje?</p>
+                        </div>
                     `;
-                    item.addEventListener('click', () => {
-                        this.executeCommand(command);
-                        this.hideCommandPalette();
+                    elements.chatMessages.appendChild(welcomeMsg);
+                } else {
+                    state.messages.forEach(msg => {
+                        const messageEl = document.createElement('div');
+                        messageEl.className = `message ${msg.sender}`;
+                        
+                        const avatarIcon = msg.sender === 'user' ? 'fas fa-user' : 'fas fa-brain';
+                        
+                        messageEl.innerHTML = `
+                            <div class="message-avatar">
+                                <i class="${avatarIcon}"></i>
+                            </div>
+                            <div class="message-bubble">
+                                <p>${msg.text}</p>
+                                <small>${new Date(msg.timestamp).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</small>
+                            </div>
+                        `;
+                        
+                        elements.chatMessages.appendChild(messageEl);
                     });
-                    list.appendChild(item);
-                });
+                }
+                
+                // Rolagem para a última mensagem
+                elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
+            },
 
+            updateChatModeTitle() {
+                const modeTitles = {
+                    otaku: '🎌 Modo Otaku',
+                    productivity: '📊 Produtividade',
+                    learning: '🎓 Aprendizado',
+                    accessibility: '♿ Acessibilidade'
+                };
+                
+                elements.chatModeTitle.textContent = modeTitles[state.currentMode] || 'Chat';
+            },
 
-                palette.classList.remove('hidden');
-                search.focus();
-
-
-                // Handle search
-                search.addEventListener('input', (e) => {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const items = list.getElementsByClassName('command-item');
-                    
-                    Array.from(items).forEach(item => {
-                        const text = item.textContent.toLowerCase();
-                        item.style.display = text.includes(searchTerm) ? 'block' : 'none';
-                    });
-                });
-
-
-                // Handle escape
-                search.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape') {
-                        this.hideCommandPalette();
-                    }
-                });
+            showLoading(button) {
+                const originalText = button.innerHTML;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Aguarde...';
+                button.disabled = true;
+                
+                return () => {
+                    button.innerHTML = originalText;
+                    button.disabled = false;
+                };
             }
+        };
 
-
-            hideCommandPalette() {
-                document.getElementById('commandPalette').classList.add('hidden');
-            }
-
-
-            // Voice Input
-            startVoiceInput() {
-                if (!('webkitSpeechRecognition' in window)) {
-                    this.showNotification('Reconhecimento de voz não suportado', 'error');
+        // Funções de Autenticação
+        const Auth = {
+            async handleLogin(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('login-email').value;
+                const password = document.getElementById('login-password').value;
+                
+                if (!email || !password) {
+                    UI.showAlert(elements.loginAlert, 'Preencha todos os campos');
                     return;
                 }
+                
+                const resetButton = UI.showLoading(elements.loginBtn);
+                
+                try {
+                    const hashedPassword = await CryptoUtils.hashPassword(password);
+                    const savedToken = localStorage.getItem('yume_token');
+                    
+                    if (savedToken === hashedPassword) {
+                        const savedUserId = localStorage.getItem('yume_user_id');
+                        const userData = await AWSService.getUserData(savedUserId);
+                        
+                        if (userData && userData.email === email) {
+                            state.user = userData;
+                            state.isAuthenticated = true;
+                            state.isAdmin = userData.role === 'admin';
+                            
+                            // Carregar métricas do usuário
+                            const userMetrics = await AWSService.getMetrics(savedUserId);
+                            if (userMetrics) {
+                                state.metrics = userMetrics;
+                            }
+                            
+                            // Atualizar sessões
+                            state.metrics.totalSessions += 1;
+                            state.metrics.lastActive = new Date().toISOString();
+                            await AWSService.saveMetrics(savedUserId, state.metrics);
+                            
+                            UI.showAlert(elements.loginAlert, '✅ Login realizado com sucesso!', 'success');
+                            
+                            setTimeout(() => {
+                                UI.updateUserInfo();
+                                UI.updateMetrics();
+                                UI.showView('main');
+                            }, 1000);
+                        } else {
+                            throw new Error('Email ou senha incorretos');
+                        }
+                    } else {
+                        throw new Error('Email ou senha incorretos');
+                    }
+                } catch (err) {
+                    UI.showAlert(elements.loginAlert, err.message);
+                } finally {
+                    resetButton();
+                }
+            },
 
+            async handleRegister(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('register-name').value;
+                const email = document.getElementById('register-email').value;
+                const password = document.getElementById('register-password').value;
+                const termsAccepted = document.getElementById('register-terms').checked;
+                
+                if (!name || !email || !password) {
+                    UI.showAlert(elements.registerAlert, 'Preencha todos os campos');
+                    return;
+                }
+                
+                if (password.length < 6) {
+                    UI.showAlert(elements.registerAlert, 'A senha deve ter pelo menos 6 caracteres');
+                    return;
+                }
+                
+                if (!termsAccepted) {
+                    UI.showAlert(elements.registerAlert, 'Aceite os Termos de Uso para continuar');
+                    return;
+                }
+                
+                const resetButton = UI.showLoading(elements.registerBtn);
+                
+                try {
+                    const hashedPassword = await CryptoUtils.hashPassword(password);
+                    const userId = `user_${Date.now()}`;
+                    
+                    const userData = {
+                        id: userId,
+                        name,
+                        email,
+                        role: email.includes('admin') ? 'admin' : 'user',
+                        createdAt: new Date().toISOString()
+                    };
+
+                    await AWSService.saveUserData(userId, userData);
+                    
+                    localStorage.setItem('yume_token', hashedPassword);
+                    localStorage.setItem('yume_user_id', userId);
+                    
+                    state.user = userData;
+                    state.isAuthenticated = true;
+                    state.isAdmin = userData.role === 'admin';
+                    
+                    // Inicializar métricas
+                    state.metrics.totalSessions = 1;
+                    state.metrics.lastActive = new Date().toISOString();
+                    await AWSService.saveMetrics(userId, state.metrics);
+                    
+                    UI.showAlert(elements.registerAlert, '✅ Cadastro realizado com sucesso!', 'success');
+                    
+                    setTimeout(() => {
+                        UI.updateUserInfo();
+                        UI.updateMetrics();
+                        UI.showView('main');
+                    }, 1500);
+                } catch (err) {
+                    UI.showAlert(elements.registerAlert, err.message);
+                } finally {
+                    resetButton();
+                }
+            },
+
+            async handleLogout() {
+                if (confirm('Deseja realmente sair?')) {
+                    if (state.user) {
+                        await AWSService.saveMetrics(state.user.id, state.metrics);
+                    }
+                    
+                    localStorage.removeItem('yume_token');
+                    localStorage.removeItem('yume_user_id');
+                    
+                    state.isAuthenticated = false;
+                    state.user = null;
+                    state.isAdmin = false;
+                    state.messages = [];
+                    state.chatHistory = [];
+                    
+                    UI.showView('login');
+                }
+            }
+        };
+
+        // Funções de Chat
+        const Chat = {
+            addMessage(sender, text) {
+                const newMessage = {
+                    id: Date.now(),
+                    sender,
+                    text,
+                    timestamp: new Date().toISOString()
+                };
+                
+                state.messages.push(newMessage);
+                
+                if (sender === 'user') {
+                    state.metrics.messagesCount += 1;
+                    UI.updateMetrics();
+                    
+                    if (state.user) {
+                        AWSService.saveMetrics(state.user.id, state.metrics);
+                    }
+                }
+                
+                UI.renderMessages();
+            },
+
+            async sendMessage() {
+                const message = elements.messageInput.value.trim();
+                if (!message) return;
+                
+                elements.messageInput.value = '';
+                Chat.addMessage('user', message);
+                
+                try {
+                    const response = await MistralService.chat(
+                        message,
+                        state.currentMode,
+                        state.chatHistory
+                    );
+                    
+                    Chat.addMessage('yume', response);
+                    
+                    state.chatHistory.push(
+                        { role: 'user', content: message },
+                        { role: 'assistant', content: response }
+                    );
+                    
+                    // Sintetizar voz se habilitado
+                    if (state.preferences.voiceEnabled) {
+                        Chat.speak(response);
+                    }
+                } catch (err) {
+                    Chat.addMessage('yume', '❌ Desculpe, houve um erro. Tente novamente.');
+                }
+            },
+
+            startVoiceRecording() {
+                if (!('webkitSpeechRecognition' in window)) {
+                    alert('Seu navegador não suporta reconhecimento de voz');
+                    return;
+                }
 
                 const recognition = new webkitSpeechRecognition();
                 recognition.lang = 'pt-BR';
-                recognition.start();
+                recognition.continuous = false;
 
+                elements.voiceBtn.classList.add('active');
+                state.metrics.voiceCommandsCount += 1;
+                UI.updateMetrics();
 
                 recognition.onresult = (event) => {
                     const transcript = event.results[0][0].transcript;
-                    document.getElementById('chatInput').value = transcript;
-                    this.showNotification('Voz capturada com sucesso!', 'success');
+                    elements.messageInput.value = transcript;
+                    elements.voiceBtn.classList.remove('active');
                 };
 
-
-                recognition.onerror = (event) => {
-                    this.showNotification('Erro no reconhecimento de voz', 'error');
+                recognition.onerror = () => {
+                    alert('Erro no reconhecimento de voz');
+                    elements.voiceBtn.classList.remove('active');
                 };
-            }
 
+                recognition.start();
+            },
 
-            // Utility Methods
-            copyMessage(text) {
-                navigator.clipboard.writeText(text).then(() => {
-                    this.showNotification('✓ Mensagem copiada!', 'success');
-                });
-            }
-
-
-            speakMessage(text) {
-                if ('speechSynthesis' in window) {
+            speak(text) {
+                if ('speechSynthesis' in window && state.preferences.voiceEnabled) {
+                    window.speechSynthesis.cancel();
                     const utterance = new SpeechSynthesisUtterance(text);
                     utterance.lang = 'pt-BR';
-                    speechSynthesis.speak(utterance);
-                    this.showNotification('🔊 Reproduzindo áudio...', 'info');
-                } else {
-                    this.showNotification('Síntese de voz não suportada', 'error');
+                    utterance.rate = state.preferences.speechRate;
+                    window.speechSynthesis.speak(utterance);
+                }
+            },
+
+            clearChat() {
+                if (confirm('Limpar conversa?')) {
+                    state.messages = [];
+                    state.chatHistory = [];
+                    UI.renderMessages();
                 }
             }
+        };
 
-
-            shareMessage(text) {
-                if (navigator.share) {
-                    navigator.share({
-                        title: 'Yume - Mensagem',
-                        text: text
+        // Funções de Admin
+        const Admin = {
+            async loadAdminMetrics() {
+                const allMetrics = await AWSService.getAdminMetrics();
+                state.adminMetrics = allMetrics;
+                
+                // Atualizar estatísticas gerais
+                elements.adminUsers.textContent = allMetrics.length;
+                elements.adminMessages.textContent = allMetrics.reduce((sum, m) => sum + (m.messagesCount || 0), 0);
+                elements.adminSessions.textContent = allMetrics.reduce((sum, m) => sum + (m.totalSessions || 0), 0);
+                
+                // Atualizar lista de usuários
+                if (allMetrics.length === 0) {
+                    elements.adminUserList.innerHTML = '<p class="text-center text-muted py-4">Nenhum dado de usuário disponível</p>';
+                } else {
+                    let userListHTML = '';
+                    
+                    allMetrics.forEach((metric, index) => {
+                        userListHTML += `
+                            <div class="p-3 bg-light rounded mb-3">
+                                <div class="row text-center">
+                                    <div class="col-6 col-md-3 mb-2">
+                                        <div class="h5 text-primary">${metric.messagesCount || 0}</div>
+                                        <div class="small text-muted">Mensagens</div>
+                                    </div>
+                                    <div class="col-6 col-md-2 mb-2">
+                                        <div class="h5 text-danger">${metric.voiceCommandsCount || 0}</div>
+                                        <div class="small text-muted">Voz</div>
+                                    </div>
+                                    <div class="col-6 col-md-2 mb-2">
+                                        <div class="h5 text-info">${metric.totalSessions || 0}</div>
+                                        <div class="small text-muted">Sessões</div>
+                                    </div>
+                                    <div class="col-6 col-md-2 mb-2">
+                                        <div class="h5 text-warning">${Math.floor((metric.sessionDuration || 0) / 60)}m</div>
+                                        <div class="small text-muted">Tempo</div>
+                                    </div>
+                                    <div class="col-12 col-md-3 mb-2">
+                                        <div class="h6 text-success">${metric.favoriteMode || 'N/A'}</div>
+                                        <div class="small text-muted">Modo Favorito</div>
+                                    </div>
+                                </div>
+                                <div class="text-center small text-muted mt-2">
+                                    Última atividade: ${metric.lastActive ? new Date(metric.lastActive).toLocaleString('pt-BR') : 'N/A'}
+                                </div>
+                            </div>
+                        `;
                     });
-                } else {
-                    this.copyMessage(text);
-                    this.showNotification('✓ Mensagem copiada para compartilhar!', 'success');
+                    
+                    elements.adminUserList.innerHTML = userListHTML;
                 }
             }
+        };
 
-
-            showNotification(message, type = 'info') {
-                const container = document.getElementById('notificationContainer');
-                const notification = document.createElement('div');
-                notification.className = `notification ${type}`;
-                notification.innerHTML = `
-                    <i class="fas fa-${this.getNotificationIcon(type)}"></i>
-                    <span>${message}</span>
-                    <button onclick="this.parentElement.remove()" style="margin-left: auto; background: none; border: none; cursor: pointer;">
-                        <i class="fas fa-times"></i>
-                    </button>
-                `;
-                
-                container.appendChild(notification);
-                setTimeout(() => notification.remove(), 5000);
-            }
-
-
-            getNotificationIcon(type) {
-                const icons = {
-                    success: 'check-circle',
-                    error: 'exclamation-circle',
-                    warning: 'exclamation-triangle',
-                    info: 'info-circle'
-                };
-                return icons[type] || 'info-circle';
-            }
-
-
-            switchMode(mode) {
-                this.currentMode = mode;
-                document.getElementById('currentMode').textContent = `Modo: ${this.capitalizeFirstLetter(mode)}`;
-                
-                // Update active mode button
-                document.querySelectorAll('.mode-btn').forEach(btn => {
-                    btn.classList.toggle('active', btn.dataset.mode === mode);
+        // Inicialização
+        const init = () => {
+            // Verificar autenticação
+            const savedToken = localStorage.getItem('yume_token');
+            const savedUserId = localStorage.getItem('yume_user_id');
+            
+            if (savedToken && savedUserId) {
+                // Tentar carregar usuário
+                AWSService.getUserData(savedUserId).then(userData => {
+                    if (userData) {
+                        state.user = userData;
+                        state.isAuthenticated = true;
+                        state.isAdmin = userData.role === 'admin';
+                        
+                        // Carregar métricas
+                        AWSService.getMetrics(savedUserId).then(metrics => {
+                            if (metrics) {
+                                state.metrics = metrics;
+                            }
+                            
+                            UI.updateUserInfo();
+                            UI.updateMetrics();
+                            UI.showView('main');
+                        });
+                    }
                 });
-
-
-                // Show/hide mode-specific menus
-                document.getElementById('otakuMenu').classList.toggle('hidden', mode !== 'otaku');
-                document.getElementById('productivityMenu').classList.toggle('hidden', mode !== 'productivity');
-                document.getElementById('learningMenu').classList.toggle('hidden', mode !== 'learning');
-
-
-                this.showNotification(`Modo alterado para: ${this.capitalizeFirstLetter(mode)}`, 'info');
             }
-
-
-            capitalizeFirstLetter(string) {
-                return string.charAt(0).toUpperCase() + string.slice(1);
-            }
-
-
-            adjustTextareaHeight() {
-                const textarea = document.getElementById('chatInput');
-                textarea.style.height = 'auto';
-                textarea.style.height = Math.min(textarea.scrollHeight, 150) + 'px';
-            }
-
-
-            handleInputKeydown(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    document.getElementById('chatForm').dispatchEvent(new Event('submit'));
+            
+            // Event Listeners
+            // Login/Register
+            elements.loginForm.addEventListener('submit', Auth.handleLogin);
+            elements.registerForm.addEventListener('submit', Auth.handleRegister);
+            elements.toggleRegister.addEventListener('click', (e) => {
+                e.preventDefault();
+                UI.showView('register');
+            });
+            elements.toggleLogin.addEventListener('click', (e) => {
+                e.preventDefault();
+                UI.showView('login');
+            });
+            
+            // Toggle password visibility
+            document.querySelectorAll('.toggle-password').forEach(toggle => {
+                toggle.addEventListener('click', function() {
+                    const input = this.parentElement.querySelector('input');
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        this.classList.remove('fa-eye');
+                        this.classList.add('fa-eye-slash');
+                    } else {
+                        input.type = 'password';
+                        this.classList.remove('fa-eye-slash');
+                        this.classList.add('fa-eye');
+                    }
+                });
+            });
+            
+            // Main
+            elements.modeCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    state.currentMode = this.dataset.mode;
+                    UI.updateChatModeTitle();
+                    UI.showView('chat');
+                });
+            });
+            
+            elements.emergencyBtn.addEventListener('click', () => UI.showView('emergency'));
+            elements.settingsBtn.addEventListener('click', () => UI.showView('settings'));
+            elements.logoutBtn.addEventListener('click', Auth.handleLogout);
+            
+            // Chat
+            elements.sendBtn.addEventListener('click', Chat.sendMessage);
+            elements.messageInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    Chat.sendMessage();
                 }
-            }
+            });
+            elements.voiceBtn.addEventListener('click', Chat.startVoiceRecording);
+            elements.backToMain.addEventListener('click', () => UI.showView('main'));
+            elements.clearChat.addEventListener('click', Chat.clearChat);
+            
+            // Settings
+            elements.backToMainFromSettings.addEventListener('click', () => UI.showView('main'));
+            elements.voiceEnabled.addEventListener('change', function() {
+                state.preferences.voiceEnabled = this.checked;
+            });
+            elements.speechRate.addEventListener('input', function() {
+                state.preferences.speechRate = parseFloat(this.value);
+                elements.speechRateValue.textContent = `${this.value}x`;
+            });
+            elements.adminBtn.addEventListener('click', async () => {
+                await Admin.loadAdminMetrics();
+                UI.showView('admin');
+            });
+            elements.logoutFromSettings.addEventListener('click', Auth.handleLogout);
+            
+            // Emergency
+            elements.backFromEmergency.addEventListener('click', () => UI.showView('main'));
+            
+            // Admin
+            elements.backFromAdmin.addEventListener('click', () => UI.showView('settings'));
+        };
 
-
-            handleInputChange(e) {
-                this.adjustTextareaHeight();
-            }
-
-
-            showWelcomeMessage() {
-                if (this.currentChat.length === 0) {
-                    this.addMessage('yume', 
-                        `👋 **Bem-vindo ao Yume!**\n\n` +
-                        `Eu sou sua assistente pessoal com múltiplas funcionalidades. Aqui estão algumas coisas que posso fazer:\n\n` +
-                        `🎌 **Modo Otaku:** Recomendações de anime, análise de personagens, notícias do mundo otaku\n` +
-                        `📊 **Modo Produtividade:** Gerenciamento de tarefas, técnicas Pomodoro, otimização de agenda\n` +
-                        `🎓 **Modo Aprendizado:** Tutoriais de programação, ajuda em matemática, conceitos de tecnologia\n\n` +
-                        `💡 **Dica:** Use comandos começando com \`/\` ou explore os botões na sidebar!\n\n` +
-                        `Experimente: \`/help\` para ver todos os comandos disponíveis.`
-                    );
-                }
-            }
-
-
-            // Auth Methods (simplified for demo)
-            loadUser() {
-                const savedUser = localStorage.getItem('yume_user');
-                if (savedUser) {
-                    this.currentUser = JSON.parse(savedUser);
-                    document.getElementById('authOverlay').classList.add('hidden');
-                }
-            }
-
-
-            toggleAuthMode() {
-                const toggleBtn = document.getElementById('authToggleBtn');
-                const actionBtn = document.getElementById('authActionBtn');
-                
-                if (actionBtn.textContent.includes('Cadastrar')) {
-                    toggleBtn.innerHTML = '<i class="fas fa-user-plus"></i> Quero me cadastrar';
-                    actionBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Entrar';
-                } else {
-                    toggleBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Já tenho conta';
-                    actionBtn.innerHTML = '<i class="fas fa-user-plus"></i> Cadastrar';
-                }
-            }
-
-
-            handleAuth() {
-                const name = document.getElementById('inputName').value;
-                const email = document.getElementById('inputEmail').value;
-                
-                if (!document.getElementById('termsCheckbox').checked) {
-                    this.showNotification('Você precisa aceitar os termos de uso', 'error');
-                    return;
-                }
-
-
-                this.currentUser = {
-                    id: Date.now(),
-                    name: name || 'Usuário',
-                    email: email || 'user@example.com'
-                };
-
-
-                localStorage.setItem('yume_user', JSON.stringify(this.currentUser));
-                document.getElementById('authOverlay').classList.add('hidden');
-                this.showNotification('Bem-vindo a Yume! 🚀', 'success');
-                this.updateUI();
-            }
-
-
-            logout() {
-                this.currentUser = null;
-                localStorage.removeItem('yume_user');
-                document.getElementById('authOverlay').classList.remove('hidden');
-                this.clearChat();
-                this.showNotification('Logout realizado com sucesso!', 'info');
-            }
-
-
-            updateUI() {
-                if (this.currentUser) {
-                    document.title = `Yume AI - ${this.currentUser.name}`;
-                }
-            }
-        }
-
-
-        // Initialize the application
-        const yumeAI = new YumeAI();
-
-
-        // Global exports for HTML onclick handlers
-        window.yumeAI = yumeAI;
-
-
-        // Auto-login for demo purposes - REMOVE IN PRODUCTION
-        setTimeout(() => {
-            if (!localStorage.getItem('yume_user')) {
-                // Auto create demo user
-                yumeAI.currentUser = {
-                    id: Date.now(),
-                    name: 'Usuário Demo',
-                    email: 'demo@yume.ai'
-                };
-                localStorage.setItem('yume_user', JSON.stringify(yumeAI.currentUser));
-                document.getElementById('authOverlay').classList.add('hidden');
-                yumeAI.showNotification('Modo demo ativado! 🚀', 'success');
-                yumeAI.updateUI();
-            }
-        }, 1000);
+        // Inicializar a aplicação quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
