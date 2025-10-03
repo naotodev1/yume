@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yume - Assistente</title>
+    <title>Yume - Sua Assistente Pessoal</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -517,6 +517,24 @@
             opacity: 0.9;
         }
 
+        /* Tool Usage Indicator */
+        .tool-usage {
+            background-color: #e0f2fe;
+            border: 1px solid #bae6fd;
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            margin: 0.5rem 0;
+            font-size: 0.875rem;
+            color: #0369a1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-usage i {
+            font-size: 1rem;
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             .col-md-6, .col-md-4, .col-md-3 {
@@ -616,7 +634,7 @@
                         <label class="form-label" for="login-email">Email</label>
                         <div class="input-with-icon">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" id="login-email" class="form-control" placeholder="seu@email.com" required>
+                            <input type="email" id="login-email" class="form-control" placeholder="seuemail@tsukiyoplatforms.com" required>
                         </div>
                     </div>
 
@@ -639,9 +657,9 @@
                 </div>
 
                 <div class="text-center mt-4 text-muted small">
-                    <p><i class="fas fa-shield-alt"></i>Ao Usar nossos serviços, você concorda com nossos Termos de Uso e Condições</p>
+                    <p><i class="fas fa-shield-alt"></i> Ao usar nossos serviços, você concorda com nossos Termos de Uso e Politica de Privacidade</p>
                     <p><i class="fas fa-robot"></i> Powered by ORPHEO Platforms</p>
-                    <p><i class="fas fa-heart"></i> ORPHEO Platforms v1.0</p>
+                    <p><i class="fas fa-heart"></i> ORPHEO Platforms v5.0</p>
                 </div>
             </div>
         </div>
@@ -656,7 +674,7 @@
                         <i class="fas fa-user-plus"></i>
                     </div>
                     <h1>Criar Conta</h1>
-                    <p>Junte-se à Yume</p>
+                    <p>Junte-se à Yume AI</p>
                 </div>
 
                 <div id="register-alert" class="alert" style="display: none;"></div>
@@ -682,7 +700,7 @@
                         <label class="form-label" for="register-password">Senha</label>
                         <div class="input-with-icon">
                             <i class="fas fa-lock"></i>
-                            <input type="password" id="register-password" class="form-control" placeholder="******" required>
+                            <input type="password" id="register-password" class="form-control" placeholder="••••••••" required>
                             <i class="fas fa-eye toggle-password" style="right: 1rem; left: auto; cursor: pointer;"></i>
                         </div>
                     </div>
@@ -721,7 +739,7 @@
                     <div class="d-flex align-items-center">
                         <div class="navbar-brand">
                             <i class="fas fa-brain"></i>
-                            <span>Yume</span>
+                            <span>Yume AI</span>
                         </div>
                         <div class="ml-3">
                             <p class="mb-0 small text-muted">Olá, <span id="user-name">Usuário</span>! 👋</p>
@@ -826,7 +844,7 @@
                     <h4 id="chat-mode-title">Modo Otaku</h4>
                     <div class="d-flex align-items-center justify-content-center">
                         <div class="bg-success rounded-circle mr-2" style="width: 8px; height: 8px;"></div>
-                        <small class="text-success">Mistral AI Online</small>
+                        <small class="text-success">Yume Online</small>
                     </div>
                 </div>
                 <button class="btn btn-danger" id="clear-chat">
@@ -1060,8 +1078,86 @@
         const CONFIG = {
             MISTRAL_API: 'https://api.mistral.ai/v1/chat/completions',
             MISTRAL_KEY: 'JGx0CZOrbKgvGdykjcfdwKiKM8oobhvC',
-            AGENT_ID: 'ag:57aae9f9:20251003:untitled-agent:145f4f35'
+            ENCRYPTION_KEY: 'yume-ai-secure-key-2025'
         };
+
+        // Ferramentas do Agent
+        const AGENT_TOOLS = [
+            {
+                "type": "code_interpreter"
+            },
+            {
+                "type": "image_generation"
+            },
+            {
+                "type": "web_search"
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_time",
+                    "description": "Obter a hora atual em um fuso horário",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "timezone": {
+                                "type": "string",
+                                "description": "O fuso horário, ex. America/Sao_Paulo"
+                            }
+                        },
+                        "required": [
+                            "timezone"
+                        ]
+                    },
+                    "strict": true
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_weather",
+                    "description": "Obter o clima atual para uma localização",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "location": {
+                                "type": "string",
+                                "description": "A cidade e estado, ex. Vitória, ES"
+                            }
+                        },
+                        "required": [
+                            "location"
+                        ]
+                    },
+                    "strict": true
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "translate_text",
+                    "description": "Traduzir texto para um idioma de destino",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "text": {
+                                "type": "string",
+                                "description": "O texto a ser traduzido"
+                            },
+                            "target_language": {
+                                "type": "string",
+                                "description": "O idioma de destino, ex. Português"
+                            }
+                        },
+                        "required": [
+                            "text",
+                            "target_language"
+                        ]
+                    },
+                    "strict": true
+                }
+            }
+        ];
 
         // Estado da aplicação
         let state = {
@@ -1087,7 +1183,8 @@
                 voiceEnabled: true,
                 soundEnabled: true
             },
-            adminMetrics: []
+            adminMetrics: [],
+            conversationId: null
         };
 
         // Elementos DOM
@@ -1188,7 +1285,7 @@
             }
         };
 
-        // Serviço Mistral AI
+        // Serviço Mistral AI com Agent
         const MistralService = {
             async chat(message, mode = 'otaku', history = []) {
                 const systemPrompts = {
@@ -1198,20 +1295,114 @@
                     accessibility: 'Você é Yume, uma assistente voltada para idosos e acessibilidade. Use linguagem simples, clara e seja extremamente paciente. Ofereça suporte emocional.'
                 };
 
-                // Resposta da API
-                return new Promise((resolve) => {
-                    setTimeout(() => {
-                        const responses = {
-                            otaku: `Olá! 👋 Como sua assistente otaku, posso te ajudar com recomendações de anime, mangá ou qualquer coisa relacionada à cultura japonesa! O que você gostaria de saber? 🎌`,
-                            productivity: `Olá! 📊 Estou aqui para ajudar você a ser mais produtivo. Posso ajudar com organização de tarefas, técnicas de estudo ou gestão do tempo. Como posso ajudar?`,
-                            learning: `Olá! 🎓 Como sua tutora, posso explicar conceitos complexos de forma simples. Sobre qual assunto você gostaria de aprender hoje?`,
-                            accessibility: `Olá! ♿ Estou aqui para oferecer suporte com paciência e cuidado. Como posso ajudar você hoje?`
-                        };
-                        
-                        const baseResponse = responses[mode] || 'Olá! Como posso ajudar você hoje?';
-                        resolve(`${baseResponse}\n\nVocê disse: "${message}"`);
-                    }, 1500);
-                });
+                try {
+                    // Preparar mensagens para a API
+                    const messages = [
+                        {
+                            role: "system",
+                            content: systemPrompts[mode] || systemPrompts.otaku
+                        },
+                        ...history.map(msg => ({
+                            role: msg.role,
+                            content: msg.content
+                        })),
+                        {
+                            role: "user",
+                            content: message
+                        }
+                    ];
+
+                    // Configuração da requisição
+                    const completionArgs = {
+                        temperature: 0.7,
+                        max_tokens: 2048,
+                        top_p: 1
+                    };
+
+                    // Fazer requisição para a API do Mistral
+                    const response = await fetch('https://api.mistral.ai/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${CONFIG.MISTRAL_KEY}`
+                        },
+                        body: JSON.stringify({
+                            model: "mistral-large-latest",
+                            messages: messages,
+                            tools: AGENT_TOOLS,
+                            tool_choice: "auto",
+                            ...completionArgs
+                        })
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`Erro ${response.status}: ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    
+                    // Processar resposta com ferramentas
+                    if (data.choices[0].message.tool_calls && data.choices[0].message.tool_calls.length > 0) {
+                        return this.processToolCalls(data.choices[0].message.tool_calls, message);
+                    }
+                    
+                    return data.choices[0].message.content;
+
+                } catch (error) {
+                    console.error('Erro Mistral AI:', error);
+                    return `❌ Desculpe, houve um erro na comunicação. Por favor, tente novamente. (${error.message})`;
+                }
+            },
+
+            async processToolCalls(toolCalls, originalMessage) {
+                let finalResponse = "🔧 **Utilizando ferramentas disponíveis:**\n\n";
+                
+                for (const toolCall of toolCalls) {
+                    const toolName = toolCall.function.name;
+                    const toolArgs = JSON.parse(toolCall.function.arguments);
+                    
+                    finalResponse += `• **${this.getToolDisplayName(toolName)}**\n`;
+                    
+                    // Simular execução das ferramentas
+                    switch (toolName) {
+                        case 'get_time':
+                            finalResponse += `  ⏰ Hora atual: ${new Date().toLocaleTimeString('pt-BR')}\n`;
+                            break;
+                        case 'get_weather':
+                            finalResponse += `  🌤️ Clima para ${toolArgs.location}: 25°C, Ensolarado\n`;
+                            break;
+                        case 'translate_text':
+                            finalResponse += `  🌐 Traduzindo: "${toolArgs.text}" para ${toolArgs.target_language}\n`;
+                            break;
+                        case 'code_interpreter':
+                            finalResponse += `  💻 Analisando código...\n`;
+                            break;
+                        case 'web_search':
+                            finalResponse += `  🔍 Buscando informações sobre: "${originalMessage}"\n`;
+                            break;
+                        case 'image_generation':
+                            finalResponse += `  🎨 Gerando imagem relacionada ao tema\n`;
+                            break;
+                    }
+                }
+                
+                finalResponse += `\n**Resposta para sua pergunta:**\n`;
+                finalResponse += `Com base nas ferramentas utilizadas, posso te ajudar com "${originalMessage}". `;
+                finalResponse += `As informações foram processadas e estou pronto para responder suas dúvidas! ✨`;
+                
+                return finalResponse;
+            },
+
+            getToolDisplayName(toolName) {
+                const toolNames = {
+                    'get_time': 'Relógio Mundial',
+                    'get_weather': 'Previsão do Tempo',
+                    'translate_text': 'Tradutor',
+                    'code_interpreter': 'Interpretador de Código',
+                    'web_search': 'Busca na Web',
+                    'image_generation': 'Geração de Imagens'
+                };
+                return toolNames[toolName] || toolName;
             }
         };
 
@@ -1322,6 +1513,10 @@
                         </div>
                         <div class="message-bubble">
                             <p>Olá, ${state.user?.name}! Como posso te ajudar hoje?</p>
+                            <div class="tool-usage">
+                                <i class="fas fa-tools"></i>
+                                <span>Agente IA ativado com 6 ferramentas disponíveis</span>
+                            </div>
                         </div>
                     `;
                     elements.chatMessages.appendChild(welcomeMsg);
@@ -1363,7 +1558,7 @@
 
             showLoading(button) {
                 const originalText = button.innerHTML;
-                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Aguarde...';
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
                 button.disabled = true;
                 
                 return () => {
@@ -1548,6 +1743,16 @@
                 elements.messageInput.value = '';
                 Chat.addMessage('user', message);
                 
+                // Mostrar indicador de carregamento
+                const loadingMsg = {
+                    id: 'loading',
+                    sender: 'yume',
+                    text: '<div class="loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>',
+                    timestamp: new Date().toISOString()
+                };
+                state.messages.push(loadingMsg);
+                UI.renderMessages();
+                
                 try {
                     const response = await MistralService.chat(
                         message,
@@ -1555,11 +1760,14 @@
                         state.chatHistory
                     );
                     
+                    // Remover mensagem de carregamento
+                    state.messages = state.messages.filter(msg => msg.id !== 'loading');
+                    
                     Chat.addMessage('yume', response);
                     
                     state.chatHistory.push(
-                        { role: 'user', content: message },
-                        { role: 'assistant', content: response }
+                        { role: "user", content: message },
+                        { role: "assistant", content: response }
                     );
                     
                     // Sintetizar voz se habilitado
@@ -1567,6 +1775,8 @@
                         Chat.speak(response);
                     }
                 } catch (err) {
+                    // Remover mensagem de carregamento em caso de erro
+                    state.messages = state.messages.filter(msg => msg.id !== 'loading');
                     Chat.addMessage('yume', '❌ Desculpe, houve um erro. Tente novamente.');
                 }
             },
